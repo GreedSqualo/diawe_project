@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 {% load staticfiles %}
 
-
 <html>
     <head>
+        <meta charset="utf-8">
         <title>
-            Rango -
+            DiaWe -
             {% block title_block %}
                 How to Tango with Django!
             {% endblock %}
         </title>
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     </head>
+
+
     <body>
         <div>
             <ul>
             {% if user.is_authenticated %}
+                hello {{ user.username }}!
                 <a href="{% url 'diawe:logout' %}">Logout</a>
-                <a href="{% url 'diawe:index' %}">Index</a>
+                <a href="{% url 'diawe:article' %}">Article</a>
+                <a href="{% url 'diawe:create' %}">Write a log</a>
             {% else %}
                 <a href="{% url 'diawe:register' %}">Sign Up</a>
                 <a href="{% url 'diawe:login' %}">Login</a>
@@ -30,6 +35,9 @@
         {% block body_block %}
         {% endblock %}
         </div> 
+        <script src="{% static 'jquery/jquery-3.3.1.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1-lts/dist/umd/popper.min.js"></script>
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 
     </body>
 </html>
