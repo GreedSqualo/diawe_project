@@ -3,11 +3,16 @@
 
 <html>
     <head>
-        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="/static/css/mystyle.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta charset="UTF-8">
+        {% block css_style %}
+        {% endblock %}
+
         <title>
             DiaWe -
             {% block title_block %}
-                How to Tango with Django!
+                Diary with us!
             {% endblock %}
         </title>
         <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
@@ -15,22 +20,9 @@
 
 
     <body>
-        <div>
-            <ul>
-            {% if user.is_authenticated %}
-                hello {{ user.username }}!
-                <a href="{% url 'diawe:logout' %}">Logout</a>
-                <a href="{% url 'diawe:article' %}">Article</a>
-                <a href="{% url 'diawe:create' %}">Write a log</a>
-            {% else %}
-                <a href="{% url 'diawe:register' %}">Sign Up</a>
-                <a href="{% url 'diawe:login' %}">Login</a>
-            {% endif %}
-                
-
-            </ul>
-        </div>
-        <hr />
+        <style type="text/css">
+        body {background-color:#b0c4de;}
+        </style>
         <div>
         {% block body_block %}
         {% endblock %}
@@ -40,4 +32,19 @@
         <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 
     </body>
+    <hr />
+    <div>
+        <ul>
+        {% if user.is_authenticated %}
+            hello {{ user.username }}!
+            <a class="base" href="{% url 'diawe:logout' %}">Logout</a>
+            <a class="base" href="{% url 'diawe:article' %}">Article</a>
+            <a class="base" href="{% url 'diawe:create' %}">Write a log</a>
+        {% else %}
+            <a class="base" href="{% url 'diawe:about' %}">About</a>
+            <a class="base" href="{% url 'diawe:register' %}">Sign Up</a>
+            <a class="base" href="{% url 'diawe:login' %}">Login</a>
+        {% endif %}
+        </ul>
+    </div>
 </html>

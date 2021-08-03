@@ -58,7 +58,6 @@ def user_login(request):
                 login(request, user)
                 return redirect(reverse('diawe:article'))
             else:
-
                 return HttpResponse("Your Rango account is disabled.")
         else:
 
@@ -71,7 +70,6 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('diawe:login'))
-
 
 
 def visitor_cookie_handler(request):
@@ -136,3 +134,6 @@ def article_create(request):
         context = { 'log_form': log_form }
         # 返回模板
         return render(request, 'diawe/create.html', context)
+
+def about(request):
+    return render(request, 'diawe/about.html')
