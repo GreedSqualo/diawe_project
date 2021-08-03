@@ -4,22 +4,26 @@ Login
 {% endblock %}
 
 {% block body_block %}
+<div style="margin: 15% 40%;">
+    <h1>Welcome!</h1>
+
 <form action="/login/" method="post">
     {% csrf_token %}
     <p>
-        <label>用户名</label>
+        <label>User</label>
         <input name="user" type="text">
     </p>
     <p>
-        <label>密码</label>
-        <input name="pwd" type="pwd">
-        <input type="submit" value="提交" >
+        <label>Password</label>
+        <input name="pwd" type="password"><br />
+        <input type="submit" value="Log in" >
         <br />
         <span style="color: red;">{{error_msg }}</span>
     </p>
 </form>
 <div>
     <a href="/register">Register</a>
+</div>
 </div>
 {% endblock %}
 <!-- <!DOCTYPE html>
