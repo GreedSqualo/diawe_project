@@ -1,12 +1,20 @@
-h1 {
+h1.typefaces {
     font-family:"Comic Sans MS", cursive, sans-serif;
     font-size:4em;
     text-align:center;
     margin-top: 100px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 
-label {
+h2.typefaces {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:2em;
+    text-align:center;
+    margin-bottom: 10px;
+}
+
+label.typefaces {
+    margin-left: 25%;
     font-family:"Comic Sans MS", cursive, sans-serif;
     font-size:1.6em;
 }
@@ -36,6 +44,7 @@ input[type=submit] {
     border-style:solid;
     border-width:medium;
     border-color:#000000;
+    margin-left: 40%;
     margin-right: 10px;
     font-size:1.4em;
 }
@@ -63,5 +72,4 @@ a.login:hover,a.login:active {
     font-family:"Comic Sans MS", cursive, sans-serif;
     font-size:1.4em;
     text-decoration:none;
-    background-color:#ececec;
 } 
