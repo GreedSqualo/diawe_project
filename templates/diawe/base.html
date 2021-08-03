@@ -3,6 +3,8 @@
     <head>
         <link rel="stylesheet" type="text/css" href="/static/css/mystyle.css">
         <meta charset="UTF-8">
+        {% block css_style %}
+        {% endblock %}
         <title>
             {% block title_bolck %}
             {% endblock %}
@@ -16,7 +18,9 @@
     <hr />
     <div>
         <ul>
-            <li><a href="{% url 'diawe:about' %}">About</a></li>
+            <a href="{% url 'diawe:about' %}">About</a>
+            <a href="{% url 'diawe:login' %}">Login</a>
+            <a href="{% url 'diawe:register' %}">Register</a>
         </ul>
     </div>
 </html>

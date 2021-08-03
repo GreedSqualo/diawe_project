@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
+
+{% block css_style %}
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+{% endblock %}
+
 {% block title_block %}
 Login
 {% endblock %}
 
 {% block body_block %}
+
+<h1>DiaWe</h1>
+
 <form action="/login/" method="post">
     {% csrf_token %}
     <p>
@@ -13,14 +21,12 @@ Login
     <p>
         <label>密码</label>
         <input name="pwd" type="pwd">
-        <input type="submit" value="提交" >
+        <input type="submit" value="submit" >
         <br />
         <span style="color: red;">{{error_msg }}</span>
     </p>
 </form>
-<div>
-    <a href="{% url 'diawe:register' %}">Register</a>
-</div>
+
 {% endblock %}
 <!-- <!DOCTYPE html>
 <html lang="en">

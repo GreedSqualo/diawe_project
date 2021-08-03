@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block css_style %}
+    <link rel="stylesheet" type="text/css" href="/static/css/about.css">
+{% endblock %}
 
 {% block title_block %}
-About
+    About
 {% endblock %}
 
 {% block body_block %}
     <h1>This project is DiaWe!</h1>
+    <img src="{% static 'images/001.png' %}" alt="first people" />
+    <img src="{% static 'images/002.png' %}" alt="second people" />
+    <img src="{% static 'images/003.png' %}" alt="third people" />
+    <img src="{% static 'images/004.png' %}" alt="fourth people" />
 {% endblock %}
