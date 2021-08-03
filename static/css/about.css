@@ -1,1 +1,9 @@
-h1 {text-align:center;}
+h1 {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:3em;
+    text-align:center;
+}
+
+img {
+    margin-left: 20px;
+}
