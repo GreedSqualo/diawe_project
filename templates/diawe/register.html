@@ -1,17 +1,22 @@
 {% extends 'diawe/base.html' %}
 {% load staticfiles %}
+
+{% block css_style %}
+    <link rel="stylesheet" type="text/css" href="/static/css/register.css">
+{% endblock %}
+
 {% block title_block %}
     Register
 {% endblock %}
 
 {% block body_block %}
-<div style="margin: 15% 40%;">
+<div>
     {% if registered %}
-        <h1>thank you for registering!</h1>
-        <a href="{% url 'diawe:login' %}">Return to the login.</a><br />
+        <h1 class="typeface1">thank you for registering!</h1>
+        <a class="register" href="{% url 'diawe:login' %}">Return to the login.</a><br />
     {% else %}
-        Rango says: <strong>register here!</strong><br />
-        <form id="user_form" method="post" action="{% url 'diawe:register' %}"enctype="multipart/form-data">
+        <h1 class="typeface1">register here!</h1><br />
+        <form class="typeface" id="user_form" method="post" action="{% url 'diawe:register' %}"enctype="multipart/form-data">
             {% csrf_token %}
             {{ user_form.as_p }}
             {{ profile_form.as_p }}

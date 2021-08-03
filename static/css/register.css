@@ -1,0 +1,43 @@
+h1.typeface1 {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:4em;
+    text-align:center;
+    margin-top: 100px;
+    margin-bottom: 40px;
+}
+
+form.typeface {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:1.6em;
+    margin-left: 35%;
+}
+
+input[type=submit] {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:1.4em;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    margin-left: 20%;
+}
+
+a.register:link, a.register:visited {
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    margin-left: 40%;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:1.4em;
+    background-color:#f7f7f7;
+    text-decoration:none;
+    text-align:center;
+    color:#000000;
+} 
+
+a.register:hover,a.register:active {
+    border-style:solid;
+    border-color:#000000;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:1.4em;
+    text-decoration:none;
+} 
