@@ -1,63 +1,25 @@
-{% extends 'base.html' %}
+{% extends 'diawe/base.html' %}
+{% load staticfiles %}
 {% block title_block %}
-Register
+    Register
 {% endblock %}
 
 {% block body_block %}
 <div style="margin: 15% 40%;">
-    <h1>Register</h1>
-<form action="/register/" method="post">
-    {% csrf_token %}
-    <p>
-        <label>User</label>
-        <input name="user" type="text">
-    </p>
-    <p>
-        <label>Email</label>
-        <input name="email" type="email">
-    </p>
-    <p>
-        <label>Password</label>
-        <input name="pwd" type="password">
-    </p>
-    <p>
-        <label>Confirm password</label>
-        <input name="repwd" type="password">
-        <input type="submit" value="OK" >
-        <br />
-        <span style="color: red;">{{error_msg }}</span>
-    </p>
-</form>
+    {% if registered %}
+        <h1>thank you for registering!</h1>
+        <a href="{% url 'diawe:login' %}">Return to the login.</a><br />
+    {% else %}
+        Rango says: <strong>register here!</strong><br />
+        <form id="user_form" method="post" action="{% url 'diawe:register' %}"enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+
+            <input type="submit" name="submit" value="Register" />
+        </form>
+    {% endif %}
 </div>
 {% endblock %}
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
-  <form action="/register/" method="post">
-        {% csrf_token %}
-        <p>
-            <label>用户名</label>
-            <input name="user" type="text">
-        </p>
-        <p>
-            <label>邮箱</label>
-            <input name="email" type="email">
-        </p>
-        <p>
-            <label>密码</label>
-            <input name="pwd" type="password">
-        </p>
-        <p>
-            <label>确认密码</label>
-            <input name="repwd" type="password">
-            <input type="submit" value="提交" >
-            <br />
-            <span style="color: red;">{{error_msg }}</span>
-        </p>
-  </form>
-</body>
-</html> -->
+
+

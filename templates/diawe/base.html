@@ -1,14 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load staticfiles %}
+
+
+<html>
     <head>
-        <meta charset="UTF-8">
         <title>
-            {% block title_bolck %}
+            Rango -
+            {% block title_block %}
+                How to Tango with Django!
             {% endblock %}
         </title>
     </head>
     <body>
+        <div>
+            <ul>
+            {% if user.is_authenticated %}
+                <a href="{% url 'diawe:logout' %}">Logout</a>
+                <a href="{% url 'diawe:index' %}">Index</a>
+            {% else %}
+                <a href="{% url 'diawe:register' %}">Sign Up</a>
+                <a href="{% url 'diawe:login' %}">Login</a>
+            {% endif %}
+                
+
+            </ul>
+        </div>
+        <hr />
+        <div>
         {% block body_block %}
         {% endblock %}
+        </div> 
+
     </body>
 </html>
