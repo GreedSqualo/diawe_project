@@ -11,9 +11,13 @@ from django.contrib.auth.models import User
 
 @login_required
 def index(request):
-    visitor_cookie_handler(request)
-    response = render(request, 'diawe/index.html')
-    return response
+    # visitor_cookie_handler(request)
+    # response = render(request, 'diawe/index.html')
+    # return response
+    nowuser = request.session.get('nowuser')
+    print(nowuser)
+    # username = "111"
+    return HttpResponse(nowuser)
 
 
 
@@ -55,10 +59,12 @@ def user_login(request):
 
         if user:
             if user.is_active:
+
+                request.session['nowuser'] = username
                 login(request, user)
                 return redirect(reverse('diawe:article'))
             else:
-
+                
                 return HttpResponse("Your Rango account is disabled.")
         else:
 
