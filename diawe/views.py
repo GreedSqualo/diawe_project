@@ -16,8 +16,9 @@ def login(request):
         obj = models.User.objects.filter(name=username, password=password).first()
         if obj:
             # return redirect('/index')
-            error_msg = "welcome"
-            return render(request, 'login.html', {'error_msg': error_msg})
+            return redirect('/home/')
+            # error_msg = "welcome"
+            # return render(request, 'login.html', {'error_msg': error_msg})
         else:
             error_msg = "账号或者密码不对"
             return render(request, 'login.html', {'error_msg': error_msg})
@@ -64,3 +65,6 @@ def register(request):
                 error_msg = "两次输入的密码不一致"
                 return render(request, 'register.html', {'error_msg': error_msg})
                 # return HttpResponse('两次输入的密码不一致')
+
+def home(request):
+    return render(request, 'home.html')

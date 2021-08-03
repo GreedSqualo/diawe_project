@@ -1,4 +1,28 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title_block %}
+Login
+{% endblock %}
+
+{% block body_block %}
+<form action="/login/" method="post">
+    {% csrf_token %}
+    <p>
+        <label>用户名</label>
+        <input name="user" type="text">
+    </p>
+    <p>
+        <label>密码</label>
+        <input name="pwd" type="pwd">
+        <input type="submit" value="提交" >
+        <br />
+        <span style="color: red;">{{error_msg }}</span>
+    </p>
+</form>
+<div>
+    <a href="/register">Register</a>
+</div>
+{% endblock %}
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,4 +44,4 @@
       </p>
   </form>
 </body>
-</html>
+</html> -->

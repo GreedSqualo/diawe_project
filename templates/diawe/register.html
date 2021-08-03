@@ -1,4 +1,33 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title_block %}
+Register
+{% endblock %}
+
+{% block body_block %}
+<form action="/register/" method="post">
+    {% csrf_token %}
+    <p>
+        <label>用户名</label>
+        <input name="user" type="text">
+    </p>
+    <p>
+        <label>邮箱</label>
+        <input name="email" type="email">
+    </p>
+    <p>
+        <label>密码</label>
+        <input name="pwd" type="password">
+    </p>
+    <p>
+        <label>确认密码</label>
+        <input name="repwd" type="password">
+        <input type="submit" value="提交" >
+        <br />
+        <span style="color: red;">{{error_msg }}</span>
+    </p>
+</form>
+{% endblock %}
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,4 +57,4 @@
         </p>
   </form>
 </body>
-</html>
+</html> -->
