@@ -3,22 +3,27 @@ body {
 }
 
 a.base:link {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    margin-right: 10px;
     text-decoration:none;
     color:#000000;
 } 
 
 a.base:visited {
+    font-family:"Comic Sans MS", cursive, sans-serif;
     text-decoration:none;
     color:#23366b;
 } 
 
 a.base:hover {
+    font-family:"Comic Sans MS", cursive, sans-serif;
     text-decoration:underline;
     font-size:150%;
     color:#207a50;
 } 
 
 a.base:active {
+    font-family:"Comic Sans MS", cursive, sans-serif;
     text-decoration:underline;
     color:#52d829;
 } 

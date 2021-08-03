@@ -1,24 +1,43 @@
 h1 {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:4em;
     text-align:center;
-    font-size:3em;
     margin-top: 100px;
     margin-bottom: 50px;
 }
 
+label {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:1.6em;
+}
+
 input[type=text] {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
     padding: 5px 5px;
     border-radius: 4px;
     margin-bottom: 20px;
 }
 
 input[type=password] {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
     padding: 5px 5px;
     border-radius: 4px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 input[type=submit] {
-    font-size:1.5em;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    margin-right: 10px;
+    font-size:1.4em;
 }
 
 p {
@@ -26,7 +45,12 @@ p {
 }
 
 a.login:link, a.login:visited {
-    font-size:1.5em;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    margin-left: 10px;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:1.4em;
     background-color:#f7f7f7;
     text-decoration:none;
     text-align:center;
@@ -34,7 +58,10 @@ a.login:link, a.login:visited {
 } 
 
 a.login:hover,a.login:active {
-    font-size:1.5em;
+    border-style:solid;
+    border-color:#000000;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:1.4em;
     text-decoration:none;
     background-color:#ececec;
 } 
