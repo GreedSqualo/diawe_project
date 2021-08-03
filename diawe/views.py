@@ -13,7 +13,7 @@ def login(request):
         username = username.strip() #用户输入末尾有空格是去空格
         password = request.POST.get('pwd')
 
-        obj = models.User.objects.filter(name=username, password=password).first()
+        obj = models.aUser.objects.filter(name=username, password=password).first()
         if obj:
             # return redirect('/index')
             return redirect('/home/')
@@ -51,13 +51,13 @@ def register(request):
         if username and password and repeat_password:
             if password == repeat_password:
                 # filter() 函数用于过滤序列，过滤掉不符合条件的元素，返回由符合条件元素组成的新列表
-                user_project = models.User.objects.filter(name=username).first()
+                user_project = models.aUser.objects.filter(name=username).first()
                 if user_project:
                     error_msg = "邮箱已存在"
                     return render(request, 'register.html', {'error_msg': error_msg})
  
                 else:
-                    models.User.objects.create(name=username, email=email,password=password).save()
+                    models.aUser.objects.create(name=username, email=email,password=password).save()
                     # error_msg = "welcome"
                     # return render(request, 'register.html', {'error_msg': error_msg})
                     return redirect('/login/')

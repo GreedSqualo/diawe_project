@@ -1,5 +1,5 @@
 from django.contrib import admin
-from diawe.models import User
+from diawe.models import aUser
 
-admin.site.register(User)
+admin.site.register(aUser)
 # Register your models here.
