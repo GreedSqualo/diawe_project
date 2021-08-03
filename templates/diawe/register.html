@@ -2,29 +2,37 @@
 {% block title_block %}
 Register
 {% endblock %}
-
+{% block css_style %}
+    <link rel="stylesheet" type="text/css" href="/static/css/register.css">
+{% endblock %}
 {% block body_block %}
+
+
 <form action="/register/" method="post">
     {% csrf_token %}
-    <p>
-        <label>用户名</label>
+   <div class="center">
+        <label>UserName</label>
         <input name="user" type="text">
-    </p>
-    <p>
-        <label>邮箱</label>
-        <input name="email" type="email">
-    </p>
-    <p>
-        <label>密码</label>
-        <input name="pwd" type="password">
-    </p>
-    <p>
-        <label>确认密码</label>
+   </div>
+
+   
+   <div class="center">
+        <label>Email Address</label>
+        <input name="email" type="email"> </div>
+    <div class="center">
+        <label>password</label>
+        <input name="pwd" type="password"></div>
+   
+  <div class="center">
+        <label>Password confirm</label>
         <input name="repwd" type="password">
-        <input type="submit" value="提交" >
+        </div>
+        <div class="center">
+        <input type="submit" value="log in" >
+         </div>
         <br />
         <span style="color: red;">{{error_msg }}</span>
-    </p>
+   
 </form>
 {% endblock %}
 <!-- <!DOCTYPE html>

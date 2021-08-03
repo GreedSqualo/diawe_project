@@ -10,6 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.login, name='login'),
     path('diawe/', include('diawe.urls')),
+     path('register/',views.register, name='register'),
 ] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # from django.conf.urls import url
 # from django.contrib import admin
