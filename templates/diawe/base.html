@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link rel="stylesheet" type="text/css" href="/static/css/mystyle.css">
         <meta charset="UTF-8">
         <title>
             {% block title_bolck %}
@@ -8,7 +9,14 @@
         </title>
     </head>
     <body>
+        <div>
         {% block body_block %}
         {% endblock %}
     </body>
+    <hr />
+    <div>
+        <ul>
+            <li><a href="{% url 'diawe:about' %}">About</a></li>
+        </ul>
+    </div>
 </html>
