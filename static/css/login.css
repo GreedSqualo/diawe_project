@@ -1,3 +1,40 @@
-h1 {text-align:center;
-    margin-top: 100px;}
-form {text-align: center;}
+h1 {
+    text-align:center;
+    font-size:3em;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+input[type=text] {
+    padding: 5px 5px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+input[type=password] {
+    padding: 5px 5px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+input[type=submit] {
+    font-size:1.5em;
+}
+
+p {
+    text-align:center;
+}
+
+a.login:link, a.login:visited {
+    font-size:1.5em;
+    background-color:#f7f7f7;
+    text-decoration:none;
+    text-align:center;
+    color:#000000;
+} 
+
+a.login:hover,a.login:active {
+    font-size:1.5em;
+    text-decoration:none;
+    background-color:#ececec;
+} 

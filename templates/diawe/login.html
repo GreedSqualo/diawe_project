@@ -15,13 +15,15 @@ Login
 <form action="/login/" method="post">
     {% csrf_token %}
     <p>
-        <label>用户名</label>
+        <label>Username: </label>
         <input name="user" type="text">
     </p>
     <p>
-        <label>密码</label>
-        <input name="pwd" type="pwd">
+        <label>Password: </label>
+        <input name="pwd" type="password">
+        <br />
         <input type="submit" value="submit" >
+        <a class="login" href="{% url 'diawe:register' %}">New User? Register!</a>
         <br />
         <span style="color: red;">{{error_msg }}</span>
     </p>

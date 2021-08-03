@@ -1,2 +1,24 @@
-body {background-color:#b0c4de;}
-a {text-decoration:none;}
+body {
+    background-color:#b0c4de;
+}
+
+a.base:link {
+    text-decoration:none;
+    color:#000000;
+} 
+
+a.base:visited {
+    text-decoration:none;
+    color:#23366b;
+} 
+
+a.base:hover {
+    text-decoration:underline;
+    font-size:150%;
+    color:#207a50;
+} 
+
+a.base:active {
+    text-decoration:underline;
+    color:#52d829;
+} 
