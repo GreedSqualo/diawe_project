@@ -107,10 +107,10 @@ def log(request):
     return render(request, 'diawe/article.html', context)
 
 def detail(request,id):
-    log = LogPost.objects.get(id=id)
-   
-    #comments = Comment.objects.filter(log=id)
-    context = {'article':log}
+    #log = LogPost.objects.get(id=id)
+    article = LogPost.objects.get(id=id)
+    comments = Comment.objects.filter(log=id)
+    context = { 'article': article,  'comments': comments }
     return render(request,'diawe/detail.html',context)
 
 def create(request):
@@ -188,20 +188,18 @@ def update(request, id):
 
 
 
-@login_required(login_url='/diawe/login/')
+@login_required
 def post_comment(request, id):
-    article = get_object_or_404(LogPost, id=id)
-
+    log = get_object_or_404(LogPost, id=id)
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
         
-        if comment_form.is_valid():
+        if comment_form.is_valid(): 
             new_comment = comment_form.save(commit=False)
-            new_comment.article = article
-            
-            new_comment.user = request.user
+            new_comment.log = LogPost.objects.get(id=id)
+            new_comment.author = request.user
             new_comment.save()
-            return redirect(article)
+            return redirect(log)
         else:
             return HttpResponse("表单内容有误，请重新填写。")
     # 处理错误请求
