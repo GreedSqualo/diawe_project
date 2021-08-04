@@ -17,6 +17,15 @@
         <!-- 文章正文 -->
         <div class="col-12">
             <p>{{ article.body }}</p>
+            {% if flag %}
+            <img src="{{ MEDIA_URL }}{{article.picture}}" alt="no picture" width="800" height="400"/>
+            <!-- <img src="{{ article.picture.url }}" style="max-width: 20%; border-radius: 15%;" class="col-md-4"> -->
+         
+            {% endif %}
+            <!-- <img src="{{ MEDIA_URL }}{{picture}}" alt="Picture of a Cat" /> -->
+            <!-- <img src="{{ article.picture.url }}" style="max-width: 20%; border-radius: 15%;" class="col-md-4"> -->
+            
+            
         </div>
         {% if users.username == author %}
 

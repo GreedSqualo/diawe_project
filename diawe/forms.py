@@ -20,7 +20,7 @@ class LogForm(forms.ModelForm):
         # 指明数据模型来源
         model = LogPost
         # 定义表单包含的字段
-        fields = ('title', 'body')
+        fields = ('title', 'body','picture',)
 
 class CommentForm(forms.ModelForm):
     class Meta:

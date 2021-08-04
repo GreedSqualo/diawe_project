@@ -109,7 +109,26 @@ def detail(request,id):
     author = str(log.author)
     print(str(log.author))
     users = User.objects.get(username=nowuser)
-    context = {'article':log, 'users':users, 'author':author}
+
+    # year = str((log.created).year)
+    # month = str((log.created).month)
+    # day = str((log.created).day)
+    # picture = 'avatar'+'\\'+year+'\\'+month+ '\\'+day+'\\'+str(log.picture)
+    # print(picture)
+    picexist = str((log.picture))
+    print(picexist)
+    print('------------')
+    
+    if picexist == "":
+        flag = False
+        log.picture = "avatar/20210805/b_1v82zMp.png"
+    else:
+        flag = True
+    print(flag)
+    print(type(log.picture))
+    
+    context = {'article':log, 'users':users, 'author':author,'flag':flag}
+    
     return render(request,'diawe/detail.html',context)
 
 def create(request):
@@ -117,18 +136,25 @@ def create(request):
     # 判断用户是否提交数据
     if request.method == "POST":
         # 将提交的数据赋值到表单实例中
-        log_form = LogForm(data=request.POST)
+        log_form = LogForm(request.POST)
         # 判断提交的数据是否满足模型的要求
         if log_form.is_valid():
             # 保存数据，但暂时不提交到数据库中
             new_article = log_form.save(commit=False)  
             # 指定当前登录用户为作者
-            # new_article.author=request.session.get('nowuser')
+
             nowuser = request.session.get('nowuser')
-            
             new_article.author = User.objects.get(username=nowuser)
-            # print(request.session.get('nowuser'))
-            # print(User.objects.get(id=1))
+
+            # print(request.FILES.get('file'))
+            # print(new_article.picture)
+            if 'file' in request.FILES:
+                new_article.picture= request.FILES.get('file')
+            # new_article.picture = request.FILES.get('picture')
+            # if 'picture' in request.FILES:
+            #     new_article.picture = request.FILES['picture']
+            # else:
+            #     print("none")
             # 将新文章保存到数据库中
             new_article.save()
             # 完成后返回到文章列表
