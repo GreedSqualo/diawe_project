@@ -12,5 +12,10 @@ urlpatterns = [
     path ('',views.user_login,name='login'),   
     path('diawe/',include('diawe.urls')),
     path('admin/', admin.site.urls),
+    path('',views.login, name='login'),
+    path('diawe/', include('diawe.urls')),
+     path('register/',views.register, name='register'),
+
     # HEAD
+
 ] # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
