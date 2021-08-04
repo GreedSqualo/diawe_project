@@ -104,8 +104,12 @@ def log(request):
     return render(request, 'diawe/article.html', context)
 
 def detail(request,id):
+    nowuser = request.session.get('nowuser')
     log = LogPost.objects.get(id=id)
-    context = {'article':log}
+    author = str(log.author)
+    print(str(log.author))
+    users = User.objects.get(username=nowuser)
+    context = {'article':log, 'users':users, 'author':author}
     return render(request,'diawe/detail.html',context)
 
 def create(request):
