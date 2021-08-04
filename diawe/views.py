@@ -118,14 +118,12 @@ def create(request):
         # 判断提交的数据是否满足模型的要求
         if log_form.is_valid():
             # 保存数据，但暂时不提交到数据库中
-            new_article = log_form.save(commit=False)
-            # 指定数据库中 id=1 的用户为作者
-            # 如果你进行过删除数据表的操作，可能会找不到id=1的用户
-            # 此时请重新创建用户，并传入此用户的id
+            new_article = log_form.save(commit=False)  
+            # 指定当前登录用户为作者
             # new_article.author=request.session.get('nowuser')
-            # nowuser = request.session.get('nowuser')
+            nowuser = request.session.get('nowuser')
             
-            new_article.author = User.objects.get(id=1)
+            new_article.author = User.objects.get(username=nowuser)
             # print(request.session.get('nowuser'))
             # print(User.objects.get(id=1))
             # 将新文章保存到数据库中
