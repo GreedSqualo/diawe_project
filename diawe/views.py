@@ -11,12 +11,10 @@ from django.contrib.auth.models import User
 
 @login_required
 def index(request):
-    # visitor_cookie_handler(request)
-    # response = render(request, 'diawe/index.html')
-    # return response
-    nowuser = request.session.get('nowuser')
-    print(nowuser)
-    return HttpResponse(nowuser)
+    visitor_cookie_handler(request)
+    response = render(request, 'diawe/index.html')
+    return response
+
 
 
 
@@ -111,6 +109,7 @@ def detail(request,id):
     return render(request,'diawe/detail.html',context)
 
 def create(request):
+    nowuser = request.session.get('nowuser')
     # 判断用户是否提交数据
     if request.method == "POST":
         # 将提交的数据赋值到表单实例中
