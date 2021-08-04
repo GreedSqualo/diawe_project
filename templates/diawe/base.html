@@ -18,31 +18,9 @@
         <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     </head>
 
-<<<<<<< HEAD
-
     <body>
         {% include 'diawe/header.html' %}
 
-=======
-    <div>
-        <br />
-        
-        <ul>
-        {% if user.is_authenticated %}
-            hello {{ user.username }}!
-            <a class="base" href="{% url 'diawe:logout' %}">Logout</a>
-            <a class="base" href="{% url 'diawe:article' %}">Article</a>
-            <a class="base" href="{% url 'diawe:create' %}">Write a log</a>
-        {% else %}
-            <a class="base" href="{% url 'diawe:about' %}">About</a>
-            <a class="base" href="{% url 'diawe:register' %}">Sign Up</a>
-            <a class="base" href="{% url 'diawe:login' %}">Login</a>
-        {% endif %}
-        </ul>
-    </div>
-    <hr />
-    <body>
->>>>>>> master
         <style type="text/css">
         body {background-color:#b0c4de;}
         </style>
@@ -53,15 +31,8 @@
         <script src="{% static 'jquery/jquery-3.3.1.js' %}"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1-lts/dist/umd/popper.min.js"></script>
         <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-<<<<<<< HEAD
         
         {% include 'diawe/footer.html' %}
     </body>
     
-=======
-
-    </body>
-    
-
->>>>>>> master
 </html>
