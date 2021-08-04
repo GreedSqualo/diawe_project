@@ -28,4 +28,39 @@
     </div>
 </div>
 
+
+<!-- 发表评论 -->
+<hr>
+{% if user.is_authenticated %}
+    <div>
+        <form 
+            action="{% url  'diawe:post_comment' article.id %}" 
+            method="POST"
+        >
+        {% csrf_token %}
+            <div class="form-group">
+                <label for="body">
+                    <strong>
+                        我也要发言：
+                    </strong>
+                </label>
+                <textarea 
+                    type="text" 
+                    class="form-control" 
+                    id="body" 
+                    name="body" 
+                    rows="2"></textarea>
+            </div>
+            <!-- 提交按钮 -->
+            <button type="submit" class="btn btn-primary ">发送</button>                    
+        </form>
+    </div>
+    <br>
+{% else %}
+    <br>
+    <h5 class="row justify-content-center">
+        请<a href="{% url 'login' %}">登录</a>后回复
+    </h5>
+    <br>
+{% endif %}
 {% endblock %}

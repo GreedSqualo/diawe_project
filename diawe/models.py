@@ -1,7 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
-
+from django.urls import reverse
 from django.utils import timezone
 
 
@@ -25,13 +25,15 @@ class LogPost(models.Model):
 
     def __str__(self):
         return self.title
+    
 
 
 class Comment(models.Model):
     log = models.ForeignKey(LogPost,on_delete=models.CASCADE,related_name='comment')
-    author = models.ForeignKey(User, on_delete=models.CASCADE,related_name='comment')
+    author = models.ForeignKey(User, on_delete=models.CASCADE,related_name='comment2')
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
+
 
     class Meta:
         ordering = ('created',)

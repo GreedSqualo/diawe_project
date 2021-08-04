@@ -7,7 +7,10 @@ from diawe.forms import  UserForm, UserProfileForm,LogForm
 from datetime import datetime
 from diawe.models import LogPost, UserProfile
 from django.contrib.auth.models import User
-
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from diawe.models import Comment
+from diawe.forms import CommentForm
 
 @login_required
 def index(request):
@@ -105,6 +108,8 @@ def log(request):
 
 def detail(request,id):
     log = LogPost.objects.get(id=id)
+   
+    #comments = Comment.objects.filter(log=id)
     context = {'article':log}
     return render(request,'diawe/detail.html',context)
 
@@ -138,9 +143,9 @@ def create(request):
         # 创建表单类实例
         log_form = LogForm()
         # 赋值上下文
-        context = { 'log_form': log_form }
+    context = { 'log_form': log_form }
         # 返回模板
-        return render(request, 'diawe/create.html', context)
+    return render(request, 'diawe/create.html', context)
 
 def about(request):
     return render(request, 'diawe/about.html')
@@ -180,3 +185,25 @@ def update(request, id):
         context = { 'log': log, 'log_form': log_form }
         # 将响应返回到模板中
         return render(request, 'diawe/update.html', context)
+
+
+
+@login_required(login_url='/diawe/login/')
+def post_comment(request, id):
+    article = get_object_or_404(LogPost, id=id)
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.article = article
+            
+            new_comment.user = request.user
+            new_comment.save()
+            return redirect(article)
+        else:
+            return HttpResponse("表单内容有误，请重新填写。")
+    # 处理错误请求
+    else:
+        return HttpResponse("发表评论仅接受POST请求。")
