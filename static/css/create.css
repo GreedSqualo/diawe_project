@@ -1,0 +1,12 @@
+label.create {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:1.4em;
+}
+
+button.create {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    font-size:1.4em;
+}
