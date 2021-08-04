@@ -195,6 +195,8 @@ def update(request, id):
             # 保存新写入的 title、body 数据并保存
             log.title = request.POST['title']
             log.body = request.POST['body']
+            if 'file' in request.FILES:
+                log.picture= request.FILES.get('file')
             log.save()
             # 完成后返回到修改后的文章中。需传入文章的 id 值
             return redirect("diawe:detail", id=id)
