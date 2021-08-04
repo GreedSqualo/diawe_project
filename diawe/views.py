@@ -100,7 +100,7 @@ def get_server_side_cookie(request, cookie, default_val=None):
 
 
 def log(request):
-    articles = LogPost.objects.all()
+    articles = LogPost.objects.filter(author=request.session['_auth_user_id'])
     # 需要传递给模板（templates）的对象
     context = { 'articles': articles }
     # render函数：载入模板，并返回context对象
