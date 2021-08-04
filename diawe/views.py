@@ -61,7 +61,7 @@ def user_login(request):
                 login(request, user)
                 return redirect(reverse('diawe:article'))
             else:
-                return HttpResponse("Your Rango account is disabled.")
+                return HttpResponse("Your DiaWe account is disabled.")
         else:
 
             print(f"Invalid login details: {username}, {password}")

@@ -2,14 +2,44 @@ h1.typeface1 {
     font-family:"Comic Sans MS", cursive, sans-serif;
     font-size:4em;
     text-align:center;
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 40px;
 }
 
-form.typeface {
+label.typeface {
     font-family:"Comic Sans MS", cursive, sans-serif;
     font-size:1.6em;
-    margin-left: 35%;
+    margin-left: 30%;
+}
+
+input[type=text] {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    padding: 5px 5px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+input[type=email] {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    padding: 5px 5px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+input[type=password] {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    padding: 5px 5px;
+    border-radius: 4px;
+    margin-bottom: 30px;
 }
 
 input[type=submit] {
@@ -18,7 +48,7 @@ input[type=submit] {
     border-style:solid;
     border-width:medium;
     border-color:#000000;
-    margin-left: 20%;
+    margin-left: 45%;
 }
 
 a.register:link, a.register:visited {
