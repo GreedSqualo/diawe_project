@@ -12,7 +12,7 @@
         <!-- 条目 -->
         <li class="nav-item">
           {% if user.is_authenticated %}
-            <h1>hello {{ user.username }}! </h1>
+            <h3 class="header1">hello {{ user.username }}! </h3>
             <a class="base" href="{% url 'diawe:logout' %}">Logout</a>
             <a class="base" href="{% url 'diawe:article' %}">Article</a>
             <a class="base" href="{% url 'diawe:create' %}">Write a log</a>

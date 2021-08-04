@@ -23,3 +23,8 @@ h6.header1 {
     font-size: 1ex;
     color: aliceblue;
 }
+
+h3.header1 {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    color: aliceblue;
+}
