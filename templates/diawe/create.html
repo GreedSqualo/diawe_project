@@ -1,6 +1,10 @@
 {% extends 'diawe/base.html' %}
 {% load staticfiles %}
 
+{% block css_style %}
+    <link rel="stylesheet" type="text/css" href="/static/css/create.css">
+{% endblock %}
+
 {% block title_block %}
     Write Log
 {% endblock %}
@@ -18,18 +22,18 @@
                 <!-- 文章标题 -->
                 <div class="form-group">
                     <!-- 标签 -->
-                    <label for="title">Title</label>
+                    <label class="create" for="title">Title</label>
                     <!-- 文本框 -->
                     <input type="text" class="form-control" id="title" name="title">
                 </div>
                 <!-- 文章正文 -->
                 <div class="form-group">
-                    <label for="body">Article</label>
+                    <label class="create" for="body">Article</label>
                     <!-- 文本区域 -->
                     <textarea type="text" class="form-control" id="body" name="body" rows="12"></textarea>
                 </div>
                 <!-- 提交按钮 -->
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="create">Submit</button>
             </form>
         </div>
     </div>

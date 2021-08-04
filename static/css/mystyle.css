@@ -1,25 +1,25 @@
-a.base:link {
+a.base:link,a.base:visited {
     font-family:"Comic Sans MS", cursive, sans-serif;
     margin-right: 10px;
     text-decoration:none;
-    color:#000000;
-} 
-
-a.base:visited {
-    font-family:"Comic Sans MS", cursive, sans-serif;
-    text-decoration:none;
-    color:#23366b;
+    color:aliceblue;
 } 
 
 a.base:hover {
     font-family:"Comic Sans MS", cursive, sans-serif;
     text-decoration:underline;
     font-size:150%;
-    color:#207a50;
+    color:#3df59f;
 } 
 
 a.base:active {
     font-family:"Comic Sans MS", cursive, sans-serif;
     text-decoration:underline;
-    color:#52d829;
+    color:#a4ff80;
 } 
+
+h6.header1 {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size: 1ex;
+    color: aliceblue;
+}
