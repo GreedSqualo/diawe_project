@@ -10,3 +10,23 @@ button.create {
     border-color:#000000;
     font-size:1.4em;
 }
+
+input[type=text] {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    padding: 5px 5px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+textarea[type=text] {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    padding: 5px 5px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}

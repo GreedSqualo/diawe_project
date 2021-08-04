@@ -1,6 +1,10 @@
 {% extends 'diawe/base.html' %}
 {% load staticfiles %}
 
+{% block css_style %}
+    <link rel="stylesheet" type="text/css" href="/static/css/article.css">
+{% endblock %}
+
 {% block title_block %}
     Homepage
 {% endblock %}
@@ -14,16 +18,16 @@
         <!-- 文章内容 -->
         <div class="col-4 mb-4">
         <!-- 卡片容器 -->
-            <div class="card h-100">
+            <div class="card h-100" style="border-style:solid;">
                 <!-- 标题 -->
-                <h4 class="card-header">{{ article.title }}</h4>
+                <h4 class="card-header1">{{ article.title }}</h4>
                 <!-- 摘要 -->
                 <div class="card-body">
-                    <p class="card-text">{{ article.body|slice:'100' }}...</p>
+                    <p class="article">{{ article.body|slice:'100' }}...</p>
                 </div>
                 <!-- 注脚 -->
-                <div class="card-footer">
-                    <a href="{% url 'diawe:detail' article.id %}" class="btn btn-primary">More Details</a>
+                <div class="card-footer1">
+                    <a href="{% url 'diawe:detail' article.id %}" class="article">More Details</a>
                 </div>
             </div>
         </div>

@@ -13,7 +13,7 @@
             <form method="post" action=".">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="title">文章标题</label>
+                    <label for="title">Title</label>
                     <!-- 在 value 属性中指定文本框的初始值为旧的内容，即 article 对象中的 title 字段 -->
                     <input type="text" class="form-control" id="title" name="title" value="{{ log.title }}">
                 </div>
