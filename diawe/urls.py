@@ -10,7 +10,9 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('article/', views.log, name='article'),
     path('detail/<int:id>/', views.detail, name='detail'),
-    path('create/', views.article_create, name='create'),
+    path('create/', views.create, name='create'),
     path('about/', views.about, name='about'),
     path('register/', views.register, name='register'),
+    path('delete/<int:id>/',views.delete,name='delete'),
+    path('update/<int:id>/', views.update, name='update'),
 ]

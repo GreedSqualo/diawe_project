@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from diawe.models import UserProfile
 from diawe.models import LogPost
-
+from diawe.models import Comment
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
     
@@ -21,3 +21,8 @@ class LogForm(forms.ModelForm):
         model = LogPost
         # 定义表单包含的字段
         fields = ('title', 'body')
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('body',)
