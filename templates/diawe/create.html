@@ -17,7 +17,7 @@
             <br>
             <h1> Add a article to {{ team.nameTeam }}</h1>
             <!-- 提交文章的表单 -->
-            <form method="post" action="/diawe/article/{{ team.slug }}/">
+            <form method="post" action="/diawe/article/{{ team.slug }}/create/">
                 <!-- Django中需要POST数据的地方都必须有csrf_token -->
                 {% csrf_token %}
                 <!-- 文章标题 -->

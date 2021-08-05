@@ -111,8 +111,8 @@ def log(request, team_id_slug):
         context_dict['articles'] = None
     # render函数：载入模板，并返回context对象
     if request.method == "POST":
-        name = request.POST['username']
         try:
+            name = request.POST.get('username')
             user = User.objects.get(username=name)
             team.users.add(user.profile)
         except User.DoesNotExist:
@@ -133,7 +133,7 @@ def create(request, team_id_slug):
     except Teams.DoesNotExist:
         team = None
     if team is None :
-        return redirect('/rango/')
+        return redirect('/diawe/')
     # 判断用户是否提交数据
     if request.method == "POST":
         # 将提交的数据赋值到表单实例中
@@ -152,7 +152,6 @@ def create(request, team_id_slug):
             # 将新文章保存到数据库中
             new_article.save()
             # 完成后返回到文章列表
-            return redirect(reverse("diawe:article", kwargs={'team_id_slug':team_id_slug}))
             # return render(request, 'diawe/article.html')
         # 如果数据不合法，返回错误信息
         else:
