@@ -210,10 +210,14 @@ def index(request):
 
     nowuser = request.session.get('nowuser')
 
+    context_dict = {}
+    user = User.objects.get(username=nowuser)
+    context_dict['teams'] = user.profile.teams_set.all()
+
     if request.method == 'POST':
         idTe = request.POST['teamId']
         teamN = request.POST['teamName']
-        user = User.objects.get(username=nowuser)
         teamNew = user.profile.teams_set.create(idT=idTe,nameTeam=teamN)
-        print(teamNew)
-    return render(request, 'diawe/index.html')
+        if teamNew:
+            return redirect('diawe/index.html')
+    return render(request, 'diawe/index.html', context=context_dict)

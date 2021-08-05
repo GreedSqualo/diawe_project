@@ -22,5 +22,17 @@
         <input type="submit" value="Create new team!" />
         </form>
     </div>
+    <div>
+        {% if teams %}
+            <ul>
+                {% for team in teams %}
+                    {{ team.nameTeam }}
+                    <br />
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>You are not in team now.</strong>
+        {% endif %}
+    </div>
 
 {% endblock %}
