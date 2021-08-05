@@ -1,0 +1,38 @@
+{% extends 'diawe/base.html' %}
+{% load staticfiles %}
+
+{% block css_style %}
+    <link rel="stylesheet" type="text/css" href="/static/css/create.css">
+{% endblock %}
+
+{% block title_block %}
+    Write Log
+{% endblock %}
+
+{% block body_block %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-10">
+            <br>
+            <form method="post" action="." enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <h2>Title</h2>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+
+                <div class="form-group">
+                    <h2>Body</h2>
+                    <textarea type="text" class="form-control" id="body" name="body" rows="12"></textarea>
+                    <input type="file" name="file">
+                </div>
+               
+                <button type="submit" class="create">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

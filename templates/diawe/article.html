@@ -1,0 +1,38 @@
+{% extends 'diawe/base.html' %}
+{% load staticfiles %}
+
+{% block css_style %}
+    <link rel="stylesheet" type="text/css" href="/static/css/article.css">
+{% endblock %}
+
+{% block title_block %}
+    Homepage
+{% endblock %}
+
+{% block body_block %}
+
+<div class="container">
+    <div class="row mt-2">
+
+        {% for article in articles %}
+        <div class="col-10 mb-4">
+            <div class="card h-100" style="border-style:solid;">
+               
+                <h4 class="card-header1">{{ article.title }}</h4>
+                
+                <div class="card-body">
+                    <p class="article">{{ article.body|slice:'100' }}...</p>
+                </div>
+              
+                <div class="card-footer1">
+                    <a href="{% url 'diawe:detail' article.id %}" class="article">More Details</a>
+                    <img class="layout" src="{% static 'images/arrow.jpg' %}" alt="arrow" width="55" height="35">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}

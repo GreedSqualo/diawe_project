@@ -1,0 +1,75 @@
+h1.typefaces {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:4em;
+    text-align:center;
+    margin-top: 100px;
+    margin-bottom: 40px;
+}
+
+h2.typefaces {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:2em;
+    text-align:center;
+    margin-bottom: 10px;
+}
+
+label.typefaces {
+    margin-left: 25%;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:1.6em;
+}
+
+input[type=text] {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    padding: 5px 5px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+input[type=password] {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    padding: 5px 5px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+}
+
+input[type=submit] {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    margin-left: 40%;
+    margin-right: 10px;
+    font-size:1.4em;
+}
+
+p {
+    text-align:center;
+}
+
+a.login:link, a.login:visited {
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    margin-left: 10px;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:1.4em;
+    background-color:#f7f7f7;
+    text-decoration:none;
+    text-align:center;
+    color:#000000;
+} 
+
+a.login:hover,a.login:active {
+    border-style:solid;
+    border-color:#000000;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:1.4em;
+    text-decoration:none;
+} 

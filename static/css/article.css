@@ -1,0 +1,50 @@
+a.article:link, a.article:visited {
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    margin-left: 10px;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:1em;
+    background-color:#f7f7f7;
+    text-decoration:none;
+    text-align:center;
+    color:#000000;
+} 
+
+a.article:hover,a.article:active {
+    border-style:solid;
+    border-color:#000000;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:1em;
+    text-decoration:none;
+} 
+
+h4.card-header1 {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    padding: 20px 30px;
+    margin-bottom: 0; 
+    background-color: #353942;
+    border-style:solid;
+    border-color:#353942;
+    color:aliceblue;
+}
+
+div.card-footer1 {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    padding: 20px 20px;
+    margin-bottom: 0; 
+    background-color: #353942;
+    border-style:solid;
+    border-color:#353942;
+    color:aliceblue;
+}
+
+p.article {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+}
+
+img.layout {
+    margin-left: 20%;
+    margin-right: 10%;
+    margin-top: 0%;
+}

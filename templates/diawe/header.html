@@ -1,0 +1,30 @@
+<!-- 定义导航栏 -->
+{% load staticfiles %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="header1">
+
+    <!-- 导航栏商标 -->
+    <h6 class="header1">DiaWe</h6>
+    <br />
+
+    <!-- 导航入口 -->
+    <div>
+      <ul class="navbar-nav">
+        <!-- 条目 -->
+        <li class="nav-item">
+          {% if user.is_authenticated %}
+            <h3 class="header1">hello {{ user.username }}! </h3>
+            <a class="base" href="{% url 'diawe:logout' %}">Logout</a>
+            <a class="base" href="{% url 'diawe:article' %}">Article</a>
+            <a class="base" href="{% url 'diawe:create' %}">Write a log</a>
+          {% else %}
+            <a class="base" href="{% url 'diawe:register' %}">Sign Up</a>
+            <a class="base" href="{% url 'diawe:login' %}">Login</a>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
