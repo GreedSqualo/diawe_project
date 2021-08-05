@@ -52,3 +52,23 @@ img.layout {
     margin-right: 10%;
     margin-top: 0%;
 }
+
+input[type=text] {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    padding: 5px 5px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+input[type=submit] {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    margin-left: 40%;
+    margin-right: 10px;
+    font-size:1.4em;
+}
