@@ -1,8 +1,8 @@
 {% extends 'diawe/base.html' %}
 {% load staticfiles %}
 
-{% block title_block %}
-    Update
+{% block css_style %}
+    <link rel="stylesheet" type="text/css" href="/static/css/create.css">
 {% endblock %}
 
 {% block body_block %}
@@ -13,16 +13,16 @@
             <form method="post" action=".">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="title">Title</label>
+                    <label for="title" class="create" >Title</label>
                     <!-- 在 value 属性中指定文本框的初始值为旧的内容，即 article 对象中的 title 字段 -->
                     <input type="text" class="form-control" id="title" name="title" value="{{ log.title }}">
                 </div>
-                <div class="form-group">
-                    <label for="body">文章正文</label>
+                <div class="form-group" >
+                    <label for="body" class="create">Article</label>
                     <!-- 文本域不需要 value 属性，直接在标签体中嵌入数据即可 -->
                     <textarea type="text" class="form-control" id="body" name="body" rows="12">{{ log.body }}</textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">完成</button>
+                <button type="submit" class="create">Submit</button>
             </form>
         </div>
     </div>

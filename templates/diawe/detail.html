@@ -1,30 +1,31 @@
 {% extends 'diawe/base.html' %}
 {% load staticfiles %}
 
+{% block css_style %}
+    <link rel="stylesheet" type="text/css" href="/static/css/detail.css">
+{% endblock %}
+
 {% block title_block %}
     Detail
 {% endblock %}
 
 {% block body_block %}
 
-<div class="container">
+<div class="container" style="background-color:aliceblue;margin: 5%;">
     <div class="row">
         <!-- 标题及作者 -->
-        <h1 class="col-12 mt-4 mb-4">{{ article.title }}</h1>
-        <div class="col-12 alert alert-success">作者：{{ article.author }}
+        <h1 class="titles">{{ article.title }}</h1>
+        <br />
+        <div class="author">Author：{{ article.author }}
             <!-- <a href="{% url 'diawe:delete' article.id%}">删除文章</a> -->
         </div>
         <!-- 文章正文 -->
-        <div class="col-12">
+        <div class="articles">
             <p>{{ article.body }}</p>
         </div>
 
-        <a href="{% url 'diawe:delete' article.id%}">
-            <button>delete</button>
-        </a>
-        <a href="{% url 'diawe:update' article.id%}">
-            <button>update</button>
-        </a>
+        <a class="button" href="{% url 'diawe:delete' article.id%}">delete</a>
+        <a class="button" href="{% url 'diawe:update' article.id%}">update</a>
     </div>
 </div>
 
@@ -32,16 +33,16 @@
 <!-- 发表评论 -->
 <hr>
 {% if user.is_authenticated %}
-    <div>
+    <div class="container">
         <form 
             action="{% url  'diawe:post_comment' article.id %}" 
             method="POST"
         >
         {% csrf_token %}
             <div class="form-group">
-                <label for="body">
+                <label for="body" class="comments">
                     <strong>
-                        我也要发言：
+                        Comment：
                     </strong>
                 </label>
                 <textarea 
@@ -52,14 +53,14 @@
                     rows="2"></textarea>
             </div>
             <!-- 提交按钮 -->
-            <button type="submit" class="btn btn-primary ">发送</button>                    
+            <button type="submit" class="submit1 ">Submit</button>                    
         </form>
     </div>
     <br>
 {% else %}
     <br>
     <h5 class="row justify-content-center">
-        请<a href="{% url 'login' %}">登录</a>后回复
+        Please<a class="button" href="{% url 'login' %}">Login</a>
     </h5>
     <br>
 {% endif %}
