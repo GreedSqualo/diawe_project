@@ -12,7 +12,7 @@ urlpatterns = [
     path('diawe/',include('diawe.urls')),
     path('admin/', admin.site.urls),
     path('',views.login, name='login'),
-    
+    path('accounts/', include('allauth.urls')),
 ]
  
 
