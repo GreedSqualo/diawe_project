@@ -18,9 +18,10 @@
         {% csrf_token %}
         <label class="typefaces">Username: </label>
         <input type="text" name="username" value="" size="50" />
-         <br />
-         <label class="typefaces">Password: </label>
-         <input type="password" name="password" value="" size="50" />
+        <br />
+        <label class="typefaces">Password: </label>
+        <input type="password" name="password" value="" size="50" />
+        <label class="typefaces" style="color: red;">{{error_msg }}</label>
         <br />
         <input type="submit" value="submit" />
         <a class="login" href="{% url 'diawe:register' %}">New User? Register!</a>

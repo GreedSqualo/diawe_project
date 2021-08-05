@@ -15,16 +15,15 @@ def index(request):
     response = render(request, 'diawe/index.html')
     return response
 
-
-
-
+######### User registration ###########
 def register(request):
-    registered = False
 
+    registered = False
     if request.method == 'POST':
         user_form = UserForm(request.POST)
         profile_form = UserProfileForm(request.POST)
 
+        # Save registration information
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
@@ -32,40 +31,45 @@ def register(request):
 
             profile = profile_form.save(commit=False)
             profile.user = user
-
             if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
-            
+                profile.picture = request.FILES['picture']         
             profile.save()
             registered = True
+
         else:
             print(user_form.errors, profile_form.errors)
+
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
     
     return render(request, 'diawe/register.html', context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
-def user_login(request):
-    if request.method == 'POST':
 
+######### User login #########
+def user_login(request):
+
+    error_msg = ''
+
+    if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-
         user = authenticate(username=username, password=password)
 
         if user:
             if user.is_active:
-
                 request.session['nowuser'] = username
                 login(request, user)
+                # Login successfully
                 return redirect(reverse('diawe:article'))
             else:
-                return HttpResponse("Your Rango account is disabled.")
+                error_msg = "Your account is disabled"
+                return render (request,'diawe/login.html',{'error_msg':error_msg})
         else:
-
-            print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
+            # Invalid login
+            error_msg = "Invalid username or password"
+            return render (request,'diawe/login.html',{'error_msg':error_msg})
+            
     else:
         return render(request, 'diawe/login.html')
 
@@ -95,120 +99,94 @@ def get_server_side_cookie(request, cookie, default_val=None):
         val = default_val
     return val
 
-
+######### Log Display #########
 def log(request):
+
     articles = LogPost.objects.all()
-    # 需要传递给模板（templates）的对象
     context = { 'articles': articles }
-    # render函数：载入模板，并返回context对象
+
     return render(request, 'diawe/article.html', context)
 
+
+######### Log Detail #########
 def detail(request,id):
+
     nowuser = request.session.get('nowuser')
     log = LogPost.objects.get(id=id)
     author = str(log.author)
-    print(str(log.author))
     users = User.objects.get(username=nowuser)
-
-    # year = str((log.created).year)
-    # month = str((log.created).month)
-    # day = str((log.created).day)
-    # picture = 'avatar'+'\\'+year+'\\'+month+ '\\'+day+'\\'+str(log.picture)
-    # print(picture)
     picexist = str((log.picture))
-    print(picexist)
-    print('------------')
-    
+
     if picexist == "":
         flag = False
         log.picture = "avatar/20210805/b_1v82zMp.png"
     else:
         flag = True
-    print(flag)
-    print(type(log.picture))
     
     context = {'article':log, 'users':users, 'author':author,'flag':flag}
     
     return render(request,'diawe/detail.html',context)
 
+
+
+######### Log Create #########
 def create(request):
     nowuser = request.session.get('nowuser')
-    # 判断用户是否提交数据
-    if request.method == "POST":
-        # 将提交的数据赋值到表单实例中
-        log_form = LogForm(request.POST)
-        # 判断提交的数据是否满足模型的要求
-        if log_form.is_valid():
-            # 保存数据，但暂时不提交到数据库中
-            new_article = log_form.save(commit=False)  
-            # 指定当前登录用户为作者
 
+    if request.method == "POST":
+        log_form = LogForm(request.POST)
+
+        if log_form.is_valid():
+            new_article = log_form.save(commit=False)  
             nowuser = request.session.get('nowuser')
             new_article.author = User.objects.get(username=nowuser)
-
-            # print(request.FILES.get('file'))
-            # print(new_article.picture)
             if 'file' in request.FILES:
                 new_article.picture= request.FILES.get('file')
-            # new_article.picture = request.FILES.get('picture')
-            # if 'picture' in request.FILES:
-            #     new_article.picture = request.FILES['picture']
-            # else:
-            #     print("none")
-            # 将新文章保存到数据库中
+
             new_article.save()
-            # 完成后返回到文章列表
             return redirect("diawe:article")
-            # return render(request, 'diawe/article.html')
-        # 如果数据不合法，返回错误信息
+
         else:
-            return HttpResponse("表单内容有误，请重新填写。")
-    # 如果用户请求获取数据
+            return HttpResponse("Invalid Form. Please write it again.")
+   
     else:
-        # 创建表单类实例
         log_form = LogForm()
-        # 赋值上下文
         context = { 'log_form': log_form }
-        # 返回模板
         return render(request, 'diawe/create.html', context)
+
+
+
 
 def about(request):
     return render(request, 'diawe/about.html')
 
+
+######### Log Delete #########
 def delete(request, id):
-    # 根据 id 获取需要删除的文章
     article = LogPost.objects.get(id=id)
-    # 调用.delete()方法删除文章
     article.delete()
-    # 完成删除后返回文章列表
     return redirect("diawe:article")
 
+
+######### Log Update #########
 def update(request, id):
-    # 获取需要修改的具体文章对象
+    
     log = LogPost.objects.get(id=id)
-    # 判断用户是否为 POST 提交表单数据
+
     if request.method == "POST":
-        # 将提交的数据赋值到表单实例中
         log_form = LogForm(data=request.POST)
-        # 判断提交的数据是否满足模型的要求
         if log_form.is_valid():
-            # 保存新写入的 title、body 数据并保存
             log.title = request.POST['title']
             log.body = request.POST['body']
             if 'file' in request.FILES:
                 log.picture= request.FILES.get('file')
             log.save()
-            # 完成后返回到修改后的文章中。需传入文章的 id 值
             return redirect("diawe:detail", id=id)
-        # 如果数据不合法，返回错误信息
+   
         else:
-            return HttpResponse("表单内容有误，请重新填写。")
+            return HttpResponse("Invalid Form. Please write it again.")
 
-    # 如果用户 GET 请求获取数据
     else:
-        # 创建表单类实例
         log_form = LogForm()
-        # 赋值上下文，将 article 文章对象也传递进去，以便提取旧的内容
         context = { 'log': log, 'log_form': log_form }
-        # 将响应返回到模板中
         return render(request, 'diawe/update.html', context)

@@ -12,18 +12,18 @@
             <br>
             <form method="post" action="." enctype="multipart/form-data">
                 {% csrf_token %}
+
                 <div class="form-group">
-                    <label for="title">文章标题</label>
-                    <!-- 在 value 属性中指定文本框的初始值为旧的内容，即 article 对象中的 title 字段 -->
+                    <h2>Title</h2>
                     <input type="text" class="form-control" id="title" name="title" value="{{ log.title }}">
                 </div>
+
                 <div class="form-group">
-                    <label for="body">文章正文</label>
-                    <!-- 文本域不需要 value 属性，直接在标签体中嵌入数据即可 -->
+                    <h2>Body</h2>
                     <textarea type="text" class="form-control" id="body" name="body" rows="12">{{ log.body }}</textarea>
                     <input type="file" name="file">
                 </div>
-                <button type="submit" class="btn btn-primary">完成</button>
+                <button type="submit" class="btn bg-info text-white">Update</button>
             </form>
         </div>
     </div>

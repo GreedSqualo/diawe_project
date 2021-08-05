@@ -23,7 +23,8 @@
         
         <ul>
         {% if user.is_authenticated %}
-            hello {{ user.username }}!
+            <label> hello {{ user.username }}!   </label>
+            
             <a class="base" href="{% url 'diawe:logout' %}">Logout</a>
             <a class="base" href="{% url 'diawe:article' %}">Article</a>
             <a class="base" href="{% url 'diawe:create' %}">Write a log</a>
