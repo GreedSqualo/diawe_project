@@ -28,3 +28,9 @@ h3.header1 {
     font-family:"Comic Sans MS", cursive, sans-serif;
     color: aliceblue;
 }
+
+div.header1{
+    background-image: url(../images/header.jpg);
+    background-repeat:no-repeat;
+    background-position: top right;
+}
