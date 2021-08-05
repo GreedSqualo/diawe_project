@@ -42,3 +42,9 @@ div.card-footer1 {
 p.article {
     font-family:"Comic Sans MS", cursive, sans-serif;
 }
+
+img.layout {
+    margin-left: 20%;
+    margin-right: 10%;
+    margin-top: 0%;
+}

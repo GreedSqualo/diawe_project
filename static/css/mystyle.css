@@ -30,7 +30,7 @@ h3.header1 {
 }
 
 div.header1{
-    background-image: url('static/images/header.jpg');
+    background-image: url(../images/header.jpg);
     background-repeat:no-repeat;
-    background-position: right;
+    background-position: top right;
 }
