@@ -66,18 +66,18 @@
 {% endif %}
 
 
-!-- 显示评论 -->
-    <h4>共有{{ comments.count }}条评论</h4>
+<!-- 显示评论 -->
+    <h4 class="comment">{{ comments.count }} comments in total: </h4>
     <div>
         {% for comment in comments %}
             <hr>
-            <p>
+            <p class="tpyeface">
                 <strong style="color: pink">
                     {{ comment.user }}
-                </strong> 于 
+                </strong> at 
                 <span style="color: green">
                     {{ comment.created|date:"Y-m-d H:i:s" }}
-                </span> 时说：
+                </span> ：
             </p>
             <pre style="font-family: inherit; font-size: 1em;">
 {{ comment.body }}</pre>

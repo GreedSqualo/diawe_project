@@ -9,7 +9,7 @@ from diawe.models import LogPost, UserProfile
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from diawe.models import Comment
+from diawe.models import Comment, Teams
 from diawe.forms import CommentForm
 
 @login_required
@@ -62,7 +62,7 @@ def user_login(request):
 
                 request.session['nowuser'] = username
                 login(request, user)
-                return redirect(reverse('diawe:article'))
+                return redirect(reverse('diawe:index'))
             else:
                 return HttpResponse("Your DiaWe account is disabled.")
         else:
@@ -205,3 +205,15 @@ def post_comment(request, id):
     # 处理错误请求
     else:
         return HttpResponse("发表评论仅接受POST请求。")
+
+def index(request):
+
+    nowuser = request.session.get('nowuser')
+
+    if request.method == 'POST':
+        idTe = request.POST['teamId']
+        teamN = request.POST['teamName']
+        user = User.objects.get(username=nowuser)
+        teamNew = user.profile.teams_set.create(idT=idTe,nameTeam=teamN)
+        print(teamNew)
+    return render(request, 'diawe/index.html')
