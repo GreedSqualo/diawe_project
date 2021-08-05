@@ -18,6 +18,11 @@ class Teams(models.Model):
     idT = models.IntegerField(unique=True,default=0)
     nameTeam = models.CharField(max_length=100)
     users = models.ManyToManyField(UserProfile)
+    slug = models.SlugField(unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.idT)
+        super(Teams,self).save(*args, **kwargs)
 
     def __str__(self):
         return self.nameTeam

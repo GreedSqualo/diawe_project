@@ -99,12 +99,18 @@ def get_server_side_cookie(request, cookie, default_val=None):
     return val
 
 
-def log(request):
-    articles = LogPost.objects.filter(author=request.session['_auth_user_id'])
-    # 需要传递给模板（templates）的对象
-    context = { 'articles': articles }
+def log(request, team_id_slug):
+    context_dict = {}
+    try:
+        team = Teams.objects.get(slug=team_id_slug)
+        articles = LogPost.objects.filter(team=team)
+        # 需要传递给模板（templates）的对象
+        context_dict['articles'] =articles
+        context_dict['team'] = team
+    except Teams.DoesNotExist:
+        context_dict['articles'] = None
     # render函数：载入模板，并返回context对象
-    return render(request, 'diawe/article.html', context)
+    return render(request, 'diawe/article.html', context=context_dict)
 
 def detail(request,id):
     #log = LogPost.objects.get(id=id)
@@ -209,15 +215,16 @@ def post_comment(request, id):
 def index(request):
 
     nowuser = request.session.get('nowuser')
-
-    context_dict = {}
-    user = User.objects.get(username=nowuser)
-    context_dict['teams'] = user.profile.teams_set.all()
-
+    try:
+        context_dict = {}
+        user = User.objects.get(username=nowuser)
+        context_dict['teams'] = user.profile.teams_set.all()
+    except user.DoesNotExist or user.profile.DoesNotExist:
+        context_dict['teams'] = None
     if request.method == 'POST':
         idTe = request.POST['teamId']
         teamN = request.POST['teamName']
         teamNew = user.profile.teams_set.create(idT=idTe,nameTeam=teamN)
         if teamNew:
-            return redirect('diawe/index.html')
+            return redirect('/diawe/')
     return render(request, 'diawe/index.html', context=context_dict)
