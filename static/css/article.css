@@ -23,9 +23,9 @@ h4.card-header1 {
     font-family:"Comic Sans MS", cursive, sans-serif;
     padding: 20px 30px;
     margin-bottom: 0; 
-    background-color: #383838;
+    background-color: #353942;
     border-style:solid;
-    border-color:#383838;
+    border-color:#353942;
     color:aliceblue;
 }
 
@@ -33,9 +33,9 @@ div.card-footer1 {
     font-family:"Comic Sans MS", cursive, sans-serif;
     padding: 20px 20px;
     margin-bottom: 0; 
-    background-color: #383838;
+    background-color: #353942;
     border-style:solid;
-    border-color:#383838;
+    border-color:#353942;
     color:aliceblue;
 }
 
