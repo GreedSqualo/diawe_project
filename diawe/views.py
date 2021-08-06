@@ -9,7 +9,7 @@ from diawe.models import LogPost, UserProfile
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from diawe.models import Comment
+from diawe.models import Comment, Teams
 from diawe.forms import CommentForm
 
 @login_required
@@ -62,7 +62,7 @@ def user_login(request):
 
                 request.session['nowuser'] = username
                 login(request, user)
-                return redirect(reverse('diawe:article'))
+                return redirect(reverse('diawe:index'))
             else:
                 return HttpResponse("Your DiaWe account is disabled.")
         else:
@@ -99,12 +99,25 @@ def get_server_side_cookie(request, cookie, default_val=None):
     return val
 
 
-def log(request):
-    articles = LogPost.objects.filter(author=request.session['_auth_user_id'])
-    # 需要传递给模板（templates）的对象
-    context = { 'articles': articles }
+def log(request, team_id_slug):
+    context_dict = {}
+    try:
+        team = Teams.objects.get(slug=team_id_slug)
+        articles = LogPost.objects.filter(team=team)
+        # 需要传递给模板（templates）的对象
+        context_dict['articles'] =articles
+        context_dict['team'] = team
+    except Teams.DoesNotExist:
+        context_dict['articles'] = None
     # render函数：载入模板，并返回context对象
-    return render(request, 'diawe/article.html', context)
+    if request.method == "POST":
+        try:
+            name = request.POST.get('username')
+            user = User.objects.get(username=name)
+            team.users.add(user.profile)
+        except User.DoesNotExist:
+            return HttpResponse("User "+name+" does not exist!")
+    return render(request, 'diawe/article.html', context=context_dict)
 
 def detail(request,id):
     #log = LogPost.objects.get(id=id)
@@ -113,8 +126,14 @@ def detail(request,id):
     context = { 'article': article,  'comments': comments }
     return render(request,'diawe/detail.html',context)
 
-def create(request):
+def create(request, team_id_slug):
     nowuser = request.session.get('nowuser')
+    try: 
+        team = Teams.objects.get(slug=team_id_slug)
+    except Teams.DoesNotExist:
+        team = None
+    if team is None :
+        return redirect('/diawe/')
     # 判断用户是否提交数据
     if request.method == "POST":
         # 将提交的数据赋值到表单实例中
@@ -122,18 +141,17 @@ def create(request):
         # 判断提交的数据是否满足模型的要求
         if log_form.is_valid():
             # 保存数据，但暂时不提交到数据库中
-            new_article = log_form.save(commit=False)  
+            new_article = log_form.save(commit=False)
+            new_article.team = team  
             # 指定当前登录用户为作者
             # new_article.author=request.session.get('nowuser')
             nowuser = request.session.get('nowuser')
-            
             new_article.author = User.objects.get(username=nowuser)
             # print(request.session.get('nowuser'))
             # print(User.objects.get(id=1))
             # 将新文章保存到数据库中
             new_article.save()
             # 完成后返回到文章列表
-            return redirect("diawe:article")
             # return render(request, 'diawe/article.html')
         # 如果数据不合法，返回错误信息
         else:
@@ -143,9 +161,9 @@ def create(request):
         # 创建表单类实例
         log_form = LogForm()
         # 赋值上下文
-    context = { 'log_form': log_form }
+    context_dict = { 'log_form': log_form ,'team': team}
         # 返回模板
-    return render(request, 'diawe/create.html', context)
+    return render(request, 'diawe/create.html', context=context_dict)
 
 def about(request):
     return render(request, 'diawe/about.html')
@@ -205,3 +223,20 @@ def post_comment(request, id):
     # 处理错误请求
     else:
         return HttpResponse("发表评论仅接受POST请求。")
+
+def index(request):
+
+    nowuser = request.session.get('nowuser')
+    try:
+        context_dict = {}
+        user = User.objects.get(username=nowuser)
+        context_dict['teams'] = user.profile.teams_set.all()
+    except user.DoesNotExist or user.profile.DoesNotExist:
+        context_dict['teams'] = None
+    if request.method == 'POST':
+        idTe = request.POST['teamId']
+        teamN = request.POST['teamName']
+        teamNew = user.profile.teams_set.create(idT=idTe,nameTeam=teamN)
+        if teamNew:
+            return redirect('/diawe/')
+    return render(request, 'diawe/index.html', context=context_dict)
