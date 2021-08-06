@@ -25,17 +25,18 @@ label.typefaces {
     font-size:1.6em;
 }
 
-a.teaml {
+a.typeface:link,a.typeface:visited,a.typeface:hover,a.typeface:active {
+    margin-left: 100px;
+    margin-bottom: 10%;
     text-decoration:none;
+    font-family:"Comic Sans MS", cursive, sans-serif;
     border-style:solid;
     border-width:medium;
     border-color:#000000;
-    margin-left: 10px;
-    font-family:"Comic Sans MS", cursive, sans-serif;
     font-size:1.4em;
     background-color:#f7f7f7;
     text-align:center;
     color:#000000;
-    margin-bottom: 20px;
-} 
+}   
+
 
