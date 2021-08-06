@@ -242,12 +242,8 @@ def index(request):
         try:
             teamm = Teams.objects.get(idT=idTe)
             if teamm is not None:
-<<<<<<< HEAD
-                return HttpResponse("This ID already exists.")
-=======
                 context_dict['msg_error'] = "This ID already exists."
                 # return HttpResponse("This ID already exists.")
->>>>>>> 1af5c0b7eca31cd5d71683f5245bf50776cd25c0
         except Teams.DoesNotExist:
             teamN = request.POST['teamName']
             teamNew = user.profile.teams_set.create(idT=idTe,nameTeam=teamN)
