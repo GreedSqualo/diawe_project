@@ -1,0 +1,92 @@
+h1.titles {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    width: 100%;
+    padding-left: 15px;
+}
+
+div.author {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size: large;
+    color: aliceblue;
+    background-color: #353942;
+    padding-top: 11px;
+    padding-left: 15px;
+    height: 50px;
+	width: 100%;
+}
+
+div.articles {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    background-color: aliceblue;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+}
+
+a.button:link, a.button:visited {
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    margin-left: 10px;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:1em;
+    background-color:#f7f7f7;
+    text-decoration:none;
+    text-align:center;
+    color:#000000;
+    margin-bottom: 15px;
+    margin-left: 15px;
+} 
+
+a.button:hover,a.button:active {
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size:1em;
+    text-decoration:none;
+    margin-bottom: 15px;
+    margin-left: 15px;
+} 
+
+label.comments {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    margin-left:auto;
+    font-size: 3ex;
+}
+
+textarea[type=text] {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    padding: 5px 5px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+button.submit1 {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    border-style:solid;
+    border-width:medium;
+    border-color:#000000;
+    padding: 5px 5px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+p.typeface {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+}
+
+h4.comment {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    margin-left:auto;
+    font-size: 3ex;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}

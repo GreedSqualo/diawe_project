@@ -1,0 +1,40 @@
+{% extends 'diawe/base.html' %}
+{% load staticfiles %}
+
+{% block css_style %}
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+{% endblock %}
+
+{% block title_block %}
+    Homepage
+{% endblock %}
+
+{% block body_block %}
+    <div>
+        <form id="add_team" method="post" action="{% url 'diawe:index' %}">
+        {% csrf_token %}
+        <label class="typefaces">Team id: </label>
+        <input type="text" name="teamId" value="" size="50" />
+        <br />
+        <label class="typefaces">Team name: </label>
+        <input type="text" name="teamName" value="" size="50" />
+        <br />
+        <label class="typefaces">{{msg_error}}</label>
+        <br />
+        <input type="submit" value="Create new team!" />
+        </form>
+    </div>
+    <div>
+        {% if teams %}
+            <ul>
+                {% for team in teams %}
+                    <a href="/diawe/article/{{ team.slug }}" class="teaml">{{ team.nameTeam }}</a>
+                    <br />
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>You are not in team now.</strong>
+        {% endif %}
+    </div>
+
+{% endblock %}

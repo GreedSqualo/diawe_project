@@ -1,0 +1,38 @@
+{% extends 'diawe/base.html' %}
+{% load staticfiles %}
+
+{% block css_style %}
+    <link rel="stylesheet" type="text/css" href="/static/css/register.css">
+{% endblock %}
+
+{% block title_block %}
+    Register
+{% endblock %}
+
+{% block body_block %}
+<div>
+    {% if registered %}
+        <h1 class="typeface1">thank you for registering!</h1>
+        <a class="register" href="{% url 'diawe:login' %}">Return to the login.</a><br />
+    {% else %}
+        <h1 class="typeface1">register here!</h1><br />
+        <form id="user_form" method="post" action="{% url 'diawe:register' %}"enctype="multipart/form-data">
+            {% csrf_token %}
+            <label class="typeface">Username: </label>
+            <input type="text" name="username" value="" size="50" />
+            <br />
+            <label class="typeface">Email address: </label>
+            <input type="email" name="email" value="" size="50" />
+            <br />
+            <label class="typeface">Password: </label>
+            <input type="password" name="password" value="" size="50" />
+            <br />
+            <label class="typeface">{{ profile_form.as_p }}</label>
+        </div>
+            <input type="submit" name="submit" value="Register" />
+        </form>
+    {% endif %}
+</div>
+{% endblock %}
+
+
