@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from diawe.models import Comment, Teams
 from diawe.forms import CommentForm
 
+from django.contrib import messages
 @login_required
 def index(request):
     visitor_cookie_handler(request)
@@ -162,9 +163,11 @@ def create(request, team_id_slug):
 
             new_article.save()
             # 完成后返回到文章列表
+            messages.success(request,"successful create a message")
             return redirect(reverse('diawe:article', kwargs={'team_id_slug': team_id_slug}))
             # return render(request, 'diawe/article.html')
         # 如果数据不合法，返回错误信息
+        
         else:
             return HttpResponse("Invalid Form. Please write it again.")
     # 如果用户请求获取数据
