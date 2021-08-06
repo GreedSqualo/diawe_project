@@ -161,9 +161,10 @@ def create(request, team_id_slug):
                 new_article.picture= request.FILES.get('file')
 
             new_article.save()
-          
-            return render(request, 'diawe/article.html')
-        
+            # 完成后返回到文章列表
+            return redirect(reverse('diawe:article', kwargs={'team_id_slug': team_id_slug}))
+            # return render(request, 'diawe/article.html')
+        # 如果数据不合法，返回错误信息
         else:
             return HttpResponse("Invalid Form. Please write it again.")
     # 如果用户请求获取数据
@@ -235,8 +236,10 @@ def index(request):
         context_dict['teams'] = None
     if request.method == 'POST':
         idTe = request.POST['teamId']
+        teamm = Teams.objects.get(idT=idTe)
+        if teamm is not None:
+            return HttpResponse("This ID already exists.")
         teamN = request.POST['teamName']
         teamNew = user.profile.teams_set.create(idT=idTe,nameTeam=teamN)
-        if teamNew:
-            return redirect('/diawe/')
+            
     return render(request, 'diawe/index.html', context=context_dict)
