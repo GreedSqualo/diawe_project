@@ -105,12 +105,12 @@ def log(request, team_id_slug):
     try:
         team = Teams.objects.get(slug=team_id_slug)
         articles = LogPost.objects.filter(team=team)
-        # 需要传递给模板（templates）的对象
+        
         context_dict['articles'] =articles
         context_dict['team'] = team
     except Teams.DoesNotExist:
         context_dict['articles'] = None
-    # render函数：载入模板，并返回context对象
+   
     if request.method == "POST":
         try:
             name = request.POST.get('username')
@@ -162,15 +162,15 @@ def create(request, team_id_slug):
                 new_article.picture= request.FILES.get('file')
 
             new_article.save()
-            # 完成后返回到文章列表
+          
             messages.success(request,"successful create a message")
             return redirect(reverse('diawe:article', kwargs={'team_id_slug': team_id_slug}))
             # return render(request, 'diawe/article.html')
-        # 如果数据不合法，返回错误信息
+        
         
         else:
             return HttpResponse("Invalid Form. Please write it again.")
-    # 如果用户请求获取数据
+  
     else:
         log_form = LogForm()
         context_dict = { 'log_form': log_form ,'team': team}
@@ -223,10 +223,10 @@ def post_comment(request, id):
             new_comment.save()
             return redirect(log)
         else:
-            return HttpResponse("表单内容有误，请重新填写。")
-    # 处理错误请求
+            return HttpResponse("wrong form please sign again")
+   
     else:
-        return HttpResponse("发表评论仅接受POST请求。")
+        return HttpResponse("only post available")
 
 def index(request):
 
@@ -239,10 +239,13 @@ def index(request):
         context_dict['teams'] = None
     if request.method == 'POST':
         idTe = request.POST['teamId']
-        teamm = Teams.objects.get(idT=idTe)
-        if teamm is not None:
-            return HttpResponse("This ID already exists.")
-        teamN = request.POST['teamName']
-        teamNew = user.profile.teams_set.create(idT=idTe,nameTeam=teamN)
-            
+        try:
+            teamm = Teams.objects.get(idT=idTe)
+            if teamm is not None:
+                context_dict['msg_error'] = "This ID already exists."
+                # return HttpResponse("This ID already exists.")
+        except Teams.DoesNotExist:
+            teamN = request.POST['teamName']
+            teamNew = user.profile.teams_set.create(idT=idTe,nameTeam=teamN)
+            return render(request, 'diawe/index.html', context=context_dict)
     return render(request, 'diawe/index.html', context=context_dict)
