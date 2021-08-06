@@ -162,7 +162,7 @@ def create(request, team_id_slug):
 
             new_article.save()
           
-            # return render(request, 'diawe/article.html')
+            return render(request, 'diawe/article.html')
         
         else:
             return HttpResponse("Invalid Form. Please write it again.")
