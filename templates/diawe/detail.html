@@ -27,9 +27,11 @@
             <img src="{{ MEDIA_URL }}{{article.picture}}" alt="no picture" width="800" height="400"/> 
             {% endif %}
         </div>
-
+        <br />
+        {% if users.username == author %}
         <a class="button" href="{% url 'diawe:delete' article.id%}">delete</a>
         <a class="button" href="{% url 'diawe:update' article.id%}">update</a>
+        {% endif %}
     </div>
 </div>
 
