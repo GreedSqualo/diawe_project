@@ -231,7 +231,7 @@ def index(request):
         context_dict = {}
         user = User.objects.get(username=nowuser)
         context_dict['teams'] = user.profile.teams_set.all()
-    except user.DoesNotExist or user.profile.DoesNotExist:
+    except:
         context_dict['teams'] = None
     if request.method == 'POST':
         idTe = request.POST['teamId']
