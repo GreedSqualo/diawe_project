@@ -236,10 +236,12 @@ def index(request):
         context_dict['teams'] = None
     if request.method == 'POST':
         idTe = request.POST['teamId']
-        teamm = Teams.objects.get(idT=idTe)
-        if teamm is not None:
-            return HttpResponse("This ID already exists.")
-        teamN = request.POST['teamName']
-        teamNew = user.profile.teams_set.create(idT=idTe,nameTeam=teamN)
-            
+        try:
+            teamm = Teams.objects.get(idT=idTe)
+            if teamm is not None:
+                return HttpResponse("This ID already exists.")
+        except Teams.DoesNotExist:
+            teamN = request.POST['teamName']
+            teamNew = user.profile.teams_set.create(idT=idTe,nameTeam=teamN)
+            return render(request, 'diawe/index.html', context=context_dict)
     return render(request, 'diawe/index.html', context=context_dict)
