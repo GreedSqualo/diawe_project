@@ -152,6 +152,7 @@ def create(request, team_id_slug):
             # 将新文章保存到数据库中
             new_article.save()
             # 完成后返回到文章列表
+            return redirect(reverse('diawe:article', kwargs={'team_id_slug': team_id_slug}))
             # return render(request, 'diawe/article.html')
         # 如果数据不合法，返回错误信息
         else:
@@ -174,7 +175,7 @@ def delete(request, id):
     # 调用.delete()方法删除文章
     article.delete()
     # 完成删除后返回文章列表
-    return redirect("diawe:article")
+    return redirect('/diawe/')
 
 def update(request, id):
     # 获取需要修改的具体文章对象
@@ -235,8 +236,10 @@ def index(request):
         context_dict['teams'] = None
     if request.method == 'POST':
         idTe = request.POST['teamId']
+        teamm = Teams.objects.get(idT=idTe)
+        if teamm is not None:
+            return HttpResponse("This ID already exists.")
         teamN = request.POST['teamName']
         teamNew = user.profile.teams_set.create(idT=idTe,nameTeam=teamN)
-        if teamNew:
-            return redirect('/diawe/')
+            
     return render(request, 'diawe/index.html', context=context_dict)
