@@ -28,12 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'diawe',
-    #'comment',
+    #'comment',ss
     'django.contrib.sites',
-     'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.github',
     
 ]
 
@@ -121,8 +117,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
-SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
+
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'

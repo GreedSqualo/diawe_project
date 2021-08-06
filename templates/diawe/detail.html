@@ -13,13 +13,13 @@
 
 <div class="container" style="background-color:aliceblue;margin: 5%;">
     <div class="row">
-        <!-- 标题及作者 -->
+   
         <h1 class="titles">{{ article.title }}</h1>
         <br />
         <div class="author">Author：{{ article.author }}
-            <!-- <a href="{% url 'diawe:delete' article.id%}">删除文章</a> -->
+        
         </div>
-        <!-- 文章正文 -->
+
         <div class="articles">
             <p>{{ article.body }}</p>
             {% if flag %}
@@ -27,14 +27,16 @@
             <img src="{{ MEDIA_URL }}{{article.picture}}" alt="no picture" width="800" height="400"/> 
             {% endif %}
         </div>
-
+        <br />
+        {% if users.username == author %}
         <a class="button" href="{% url 'diawe:delete' article.id%}">delete</a>
         <a class="button" href="{% url 'diawe:update' article.id%}">update</a>
+        {% endif %}
     </div>
 </div>
 
 
-<!-- 发表评论 -->
+
 <hr>
 {% if user.is_authenticated %}
     <div class="container">
@@ -56,14 +58,15 @@
                     name="body" 
                     rows="2"></textarea>
             </div>
-            <!-- 提交按钮 -->
+       
             <button type="submit" class="submit1 ">Submit</button>                    
         </form>
     </div>
     <br>
 {% endif %}
 
-<!-- 显示评论 -->
+
+
     <h4 class="comment">{{ comments.count }} comments in total: </h4>
     <div class="comments">
         {% for comment in comments %}

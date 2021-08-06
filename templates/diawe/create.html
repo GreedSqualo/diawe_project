@@ -11,30 +11,32 @@
 
 {% block body_block %}
 
+
+
 <div class="container">
     <div class="row">
         <div class="col-12">
             <br>
             <h1> Add a article to {{ team.nameTeam }}</h1>
-            <!-- 提交文章的表单 -->
+          
             <form method="post" action="/diawe/article/{{ team.slug }}/create/" enctype="multipart/form-data">
-                <!-- Django中需要POST数据的地方都必须有csrf_token -->
+               
                 {% csrf_token %}
-                <!-- 文章标题 -->
+              
                 <div class="form-group">
-                    <!-- 标签 -->
+                  
                     <label class="create" for="title">Title</label>
-                    <!-- 文本框 -->
+             
                     <input type="text" class="form-control" id="title" name="title">
                 </div>
-                <!-- 文章正文 -->
+            
                 <div class="form-group">
                     <label class="create" for="body">Article</label>
-                    <!-- 文本区域 -->
+                   
                     <textarea type="text" class="form-control" id="body" name="body" rows="12"></textarea>
                     <input type="file" name="file">
                 </div>
-                <!-- 提交按钮 -->
+               
                 <button type="submit" class="create">Submit</button>
             </form>
         </div>

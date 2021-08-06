@@ -27,17 +27,15 @@
             <div class="test">
             {% for article in articles %}
                 <br />
-                <!-- 文章内容 -->
                 <div class="article">
-                <!-- 卡片容器 -->
                     <div class="card h-100" style="border-style:solid;">
-                        <!-- 标题 -->
+              
                         <h4 class="card-header1">{{ article.title }}</h4>
-                        <!-- 摘要 -->
+                 
                         <div class="card-body">
                             <p class="article">{{ article.body|slice:'100' }}...</p>
                         </div>
-                        <!-- 注脚 -->
+                
                         <div class="card-footer1">
                             <a class="article" href="{% url 'diawe:detail' article.id %}">More Details</a>
                             <img class="layout" src="{% static 'images/arrow.jpg' %}" alt="arrow" width="55" height="35">

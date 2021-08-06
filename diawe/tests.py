@@ -60,3 +60,4 @@ class FormTest(TestCase):
 
             self.assertTrue(expected_field_name in fields.keys())
             self.assertEqual(expected_field, type(fields[expected_field_name]))
+
