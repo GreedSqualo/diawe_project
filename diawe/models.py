@@ -17,6 +17,7 @@ class UserProfile(models.Model):
 class Teams(models.Model):
     idT = models.IntegerField(unique=True,default=0)
     nameTeam = models.CharField(max_length=100)
+    ###############
     users = models.ManyToManyField(UserProfile)
     slug = models.SlugField(unique=True)
 
@@ -34,6 +35,7 @@ class LogPost(models.Model):
     created = models.DateTimeField(default=timezone.now)
     updated = models.DateTimeField(auto_now=True)
     team = models.ForeignKey(Teams, on_delete=models.CASCADE)
+    picture = models.ImageField(upload_to='avatar/%Y%m%d/', blank=True)
 
     class Meta:
         ordering = ('-created',)
