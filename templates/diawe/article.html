@@ -14,24 +14,37 @@
 <div class="container">
     <div class="row mt-2">
 
-        {% for article in articles %}
-        <div class="col-10 mb-4">
-            <div class="card h-100" style="border-style:solid;">
-               
-                <h4 class="card-header1">{{ article.title }}</h4>
-                
-                <div class="card-body">
-                    <p class="article">{{ article.body|slice:'100' }}...</p>
+        {% if team %}
+            <div>
+                <h1 class="name1">{{ team.nameTeam }}</h1>
+                <a class="article" href="/diawe/article/{{ team.slug }}/create/">Write a log</a>
+                <form id="login_form" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Add a new member: " />
+                    <input type="text" name="username" value="" size="50" />
+                </form>
+            <div>
+            {% for article in articles %}
+                <!-- 文章内容 -->
+                <div class="col-10 mb-4">
+                <!-- 卡片容器 -->
+                    <div class="card h-100" style="border-style:solid;">
+                        <!-- 标题 -->
+                        <h4 class="card-header1">{{ article.title }}</h4>
+                        <!-- 摘要 -->
+                        <div class="card-body">
+                            <p class="article">{{ article.body|slice:'100' }}...</p>
+                        </div>
+                        <!-- 注脚 -->
+                        <div class="card-footer1">
+                            <a class="article" href="{% url 'diawe:detail' article.id %}">More Details</a>
+                            <img class="layout" src="{% static 'images/arrow.jpg' %}" alt="arrow" width="55" height="35">
+                        </div>
+                    </div>
                 </div>
-              
-                <div class="card-footer1">
-                    <a href="{% url 'diawe:detail' article.id %}" class="article">More Details</a>
-                    <img class="layout" src="{% static 'images/arrow.jpg' %}" alt="arrow" width="55" height="35">
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-
+            {% endfor %}
+        {% else %}
+        {% endif %}
     </div>
 </div>
 

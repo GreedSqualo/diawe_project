@@ -54,6 +54,7 @@ a.button:hover,a.button:active {
 label.comments {
     font-family:"Comic Sans MS", cursive, sans-serif;
     margin-left:auto;
+    font-size: 3ex;
 }
 
 textarea[type=text] {
@@ -74,4 +75,18 @@ button.submit1 {
     padding: 5px 5px;
     border-radius: 4px;
     margin-bottom: 20px;
+}
+
+p.typeface {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+}
+
+h4.comment {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    margin-left:auto;
+    font-size: 3ex;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
 }

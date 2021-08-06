@@ -7,10 +7,9 @@ from diawe.forms import  UserForm, UserProfileForm,LogForm
 from datetime import datetime
 from diawe.models import LogPost, UserProfile
 from django.contrib.auth.models import User
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from diawe.models import Comment
+from diawe.models import Comment, Teams
 from diawe.forms import CommentForm
 
 @login_required
@@ -21,15 +20,14 @@ def index(request):
 
 
 
-######### User registration ###########
-def register(request):
 
+def register(request):
     registered = False
+
     if request.method == 'POST':
         user_form = UserForm(request.POST)
         profile_form = UserProfileForm(request.POST)
 
-        # Save registration information
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
@@ -37,11 +35,12 @@ def register(request):
 
             profile = profile_form.save(commit=False)
             profile.user = user
+
             if 'picture' in request.FILES:
                 profile.picture = request.FILES['picture']
+            
             profile.save()
             registered = True
-
         else:
             print(user_form.errors, profile_form.errors)
     else:
@@ -50,27 +49,26 @@ def register(request):
     
     return render(request, 'diawe/register.html', context={'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
-
-######### User login #########
 def user_login(request):
-    error_msg = ''
     if request.method == 'POST':
+
         username = request.POST.get('username')
         password = request.POST.get('password')
+
         user = authenticate(username=username, password=password)
 
         if user:
             if user.is_active:
+
                 request.session['nowuser'] = username
                 login(request, user)
-                return redirect(reverse('diawe:article'))
+                return redirect(reverse('diawe:index'))
             else:
-                error_msg = "Your account is disabled"
-                return render (request,'diawe/login.html',{'error_msg':error_msg})
+                return HttpResponse("Your DiaWe account is disabled.")
         else:
-             # Invalid login
-            error_msg = "Invalid username or password"
-            return render (request,'diawe/login.html',{'error_msg':error_msg})
+
+            print(f"Invalid login details: {username}, {password}")
+            return HttpResponse("Invalid login details supplied.")
     else:
         return render(request, 'diawe/login.html')
 
@@ -100,14 +98,27 @@ def get_server_side_cookie(request, cookie, default_val=None):
         val = default_val
     return val
 
-######### Log Display #########
-def log(request):
-    articles = LogPost.objects.all()
-    context = { 'articles': articles }
-    return render(request, 'diawe/article.html', context)
 
+def log(request, team_id_slug):
+    context_dict = {}
+    try:
+        team = Teams.objects.get(slug=team_id_slug)
+        articles = LogPost.objects.filter(team=team)
+        # 需要传递给模板（templates）的对象
+        context_dict['articles'] =articles
+        context_dict['team'] = team
+    except Teams.DoesNotExist:
+        context_dict['articles'] = None
+    # render函数：载入模板，并返回context对象
+    if request.method == "POST":
+        try:
+            name = request.POST.get('username')
+            user = User.objects.get(username=name)
+            team.users.add(user.profile)
+        except User.DoesNotExist:
+            return HttpResponse("User "+name+" does not exist!")
+    return render(request, 'diawe/article.html', context=context_dict)
 
-######### Log Detail #########
 def detail(request,id):
     nowuser = request.session.get('nowuser')
     log = LogPost.objects.get(id=id)
@@ -121,69 +132,70 @@ def detail(request,id):
         flag = True
     comments = Comment.objects.filter(log=id)
     context = {'article':log, 'users':users, 'author':author,'flag':flag,'comments':comments}
+    return render(request,'diawe/detail.html',context)
     # #log = LogPost.objects.get(id=id)
     # article = LogPost.objects.get(id=id)
     # comments = Comment.objects.filter(log=id)
     # context = { 'article': article,  'comments': comments }
-    return render(request,'diawe/detail.html',context)
+    # return render(request,'diawe/detail.html',context)
 
-
-######### Log Create #########
-def create(request):
+def create(request, team_id_slug):
     nowuser = request.session.get('nowuser')
-    
+    try: 
+        team = Teams.objects.get(slug=team_id_slug)
+    except Teams.DoesNotExist:
+        team = None
+    if team is None :
+        return redirect('/diawe/')
+  
     if request.method == "POST":
         log_form = LogForm(data=request.POST)
-        
+
         if log_form.is_valid():
-            new_article = log_form.save(commit=False)  
+            new_article = log_form.save(commit=False)
+            new_article.team = team  
             nowuser = request.session.get('nowuser')
             new_article.author = User.objects.get(username=nowuser)
+            
             if 'file' in request.FILES:
                 new_article.picture= request.FILES.get('file')
 
             new_article.save()
-            return redirect("diawe:article")
- 
+          
+            # return render(request, 'diawe/article.html')
+        
         else:
             return HttpResponse("Invalid Form. Please write it again.")
-
+    # 如果用户请求获取数据
     else:
         log_form = LogForm()
-        context = { 'log_form': log_form }
-        return render(request, 'diawe/create.html', context)
-    #     # 创建表单类实例
-    #     log_form = LogForm()
-    #     # 赋值上下文
-    # context = { 'log_form': log_form }
-    #     # 返回模板
-    # return render(request, 'diawe/create.html', context)
+        context_dict = { 'log_form': log_form ,'team': team}
+        return render(request, 'diawe/create.html', context=context_dict)
 
 def about(request):
     return render(request, 'diawe/about.html')
 
-######### Log Delete #########
 def delete(request, id):
     article = LogPost.objects.get(id=id)
     article.delete()
-    return redirect("diawe:article")
-
+    return redirect("diawe:index")
 
 def update(request, id):
-  
+   
     log = LogPost.objects.get(id=id)
  
     if request.method == "POST":
-     
-        log_form = LogForm(request.POST)
+  
+        log_form = LogForm(data=request.POST)
         if log_form.is_valid():
-            log.title = request.POST('title')
-            log.body = request.POST('body')
+            log.title = request.POST['title']
+            log.body = request.POST['body']
             if 'file' in request.FILES:
                 log.picture= request.FILES.get('file')
             log.save()
-            return redirect("diawe:detail", id=id)
            
+            return redirect("diawe:detail", id=id)
+        
         else:
             return HttpResponse("Invalid Form. Please write it again.")
 
@@ -211,3 +223,20 @@ def post_comment(request, id):
     # 处理错误请求
     else:
         return HttpResponse("发表评论仅接受POST请求。")
+
+def index(request):
+
+    nowuser = request.session.get('nowuser')
+    try:
+        context_dict = {}
+        user = User.objects.get(username=nowuser)
+        context_dict['teams'] = user.profile.teams_set.all()
+    except:
+        context_dict['teams'] = None
+    if request.method == 'POST':
+        idTe = request.POST['teamId']
+        teamN = request.POST['teamName']
+        teamNew = user.profile.teams_set.create(idT=idTe,nameTeam=teamN)
+        if teamNew:
+            return redirect('/diawe/')
+    return render(request, 'diawe/index.html', context=context_dict)

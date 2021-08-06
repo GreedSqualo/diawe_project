@@ -16,8 +16,7 @@
           {% if user.is_authenticated %}
             <h3 class="header1">hello {{ user.username }}! </h3>
             <a class="base" href="{% url 'diawe:logout' %}">Logout</a>
-            <a class="base" href="{% url 'diawe:article' %}">Article</a>
-            <a class="base" href="{% url 'diawe:create' %}">Write a log</a>
+            <a class="base" href="{% url 'diawe:index' %}">Homepage</a>
           {% else %}
             <a class="base" href="{% url 'diawe:register' %}">Sign Up</a>
             <a class="base" href="{% url 'diawe:login' %}">Login</a>

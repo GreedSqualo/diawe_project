@@ -1,0 +1,4 @@
+db.sqlite3
+__pycache__/
+*.pyc
+diawe_project/__pycache__/

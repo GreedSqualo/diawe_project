@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.forms import fields
 from diawe.models import UserProfile
 from diawe.models import LogPost
 from diawe.models import Comment
