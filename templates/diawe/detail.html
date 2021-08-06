@@ -63,32 +63,21 @@
         </form>
     </div>
     <br>
-{% else %}
-    <br>
-    <h5 class="row justify-content-center">
-        Please<a class="button" href="{% url 'login' %}">Login</a>
-    </h5>
-    <br>
 {% endif %}
 
 
 
     <h4 class="comment">{{ comments.count }} comments in total: </h4>
-    <div>
+    <div class="comments">
         {% for comment in comments %}
             <hr>
-            <p class="tpyeface">
-                <strong style="color: pink">
-                    {{ comment.user }}
-                </strong> at 
-                <span style="color: green">
-                    {{ comment.created|date:"Y-m-d H:i:s" }}
-                </span> ：
+            <p class="comme">
+                {{ comment.author }} at {{ comment.created|date:"Y-m-d H:i:s" }} ：
             </p>
-            <pre style="font-family: inherit; font-size: 1em;">
-{{ comment.body }}</pre>
+            <pre class="commen">
+                {{ comment.body }}
+            </pre>
         {% endfor %}
     </div>
-</div>
 
 {% endblock %}

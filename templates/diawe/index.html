@@ -28,8 +28,8 @@
         {% if teams %}
             <ul>
                 {% for team in teams %}
-                    <a href="/diawe/article/{{ team.slug }}" class="teaml">{{ team.nameTeam }}</a>
-                    <br />
+                    <a class="typeface" href="/diawe/article/{{ team.slug }}">{{ team.nameTeam }}</a>
+                    <br /><br />
                 {% endfor %}
             </ul>
         {% else %}

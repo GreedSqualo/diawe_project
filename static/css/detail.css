@@ -77,10 +77,6 @@ button.submit1 {
     margin-bottom: 20px;
 }
 
-p.typeface {
-    font-family:"Comic Sans MS", cursive, sans-serif;
-}
-
 h4.comment {
     font-family:"Comic Sans MS", cursive, sans-serif;
     margin-left:auto;
@@ -89,4 +85,15 @@ h4.comment {
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 15px;
+}
+
+p.comme {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-weight:bold;
+    padding-left: 25px;
+}
+
+pre.commen {
+    font-family:"Comic Sans MS", cursive, sans-serif;
+    font-size: 1em;
 }
