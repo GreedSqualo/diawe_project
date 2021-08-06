@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'diawe',
-    #'comment',
+    #'comment',ss
     'django.contrib.sites',
     
 ]
