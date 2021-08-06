@@ -15,7 +15,7 @@
     <div class="row mt-2">
 
         {% if team %}
-            <div>
+            <div class="test">
                 <h1 class="name1">{{ team.nameTeam }}</h1>
                 <a class="article" href="/diawe/article/{{ team.slug }}/create/">Write a log</a>
                 <form id="login_form" method="post">
@@ -23,10 +23,12 @@
                     <input type="submit" value="Add a new member: " />
                     <input type="text" name="username" value="" size="50" />
                 </form>
-            <div>
+            </div>    
+            <div class="test">
             {% for article in articles %}
+                <br />
                 <!-- 文章内容 -->
-                <div class="col-10 mb-4">
+                <div class="article">
                 <!-- 卡片容器 -->
                     <div class="card h-100" style="border-style:solid;">
                         <!-- 标题 -->
@@ -42,8 +44,11 @@
                         </div>
                     </div>
                 </div>
+                <br /><br />
             {% endfor %}
+            </div>
         {% else %}
+            <h4>No article in this team now!</h4>
         {% endif %}
     </div>
 </div>
